@@ -1,0 +1,2 @@
+class EventTicket < ApplicationRecord
+end
