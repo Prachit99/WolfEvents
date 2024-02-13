@@ -15,7 +15,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    # @available_rooms = Room.available_rooms(params[:event_date],params[:event_start_time],params[:event_end_time])
+    @available_rooms = Room.all
   end
 
   # GET /events/1/edit
@@ -25,14 +25,21 @@ class EventsController < ApplicationController
   # POST /events or /events.json
   def create
     @event = Event.new(event_params)
-    @available_rooms = Room.available_rooms(params[:event_date],params[:event_start_time],params[:event_end_time])
+    @available_rooms = Room.all
     respond_to do |format|
-      if @event.save
-        format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
-        format.json { render :show, status: :created, location: @event }
+      room = Room.find(params[:event][:room_id])
+      if room.present?
+        @event.room = room
+        if @event.save
+          format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
+          format.json { render :show, status: :created, location: @event }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @event.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity, notice: "Selected room not found." }
+        format.json { render json: { error: "Selected room not found." }, status: :unprocessable_entity }
       end
     end
   end
@@ -68,6 +75,6 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:event_name, :event_cat, :event_date, :event_start_time, :event_end_time, :ticket_price, :no_of_seats)
+      params.require(:event).permit(:event_name, :event_cat, :event_date, :event_start_time, :event_end_time, :ticket_price, :no_of_seats, :room_id)
     end
 end
