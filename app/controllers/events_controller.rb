@@ -15,7 +15,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    @available_rooms = Room.available_rooms(params[:event_date],params[:event_start_time],params[:event_end_time])
+    # @available_rooms = Room.available_rooms(params[:event_date],params[:event_start_time],params[:event_end_time])
   end
 
   # GET /events/1/edit

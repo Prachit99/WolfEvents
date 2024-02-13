@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   has_many :attendees
   has_many :event_tickets
-  belongs_to :rooms
+  belongs_to :room
 
   validates :event_name, presence: true
   validates :event_cat, presence: true
