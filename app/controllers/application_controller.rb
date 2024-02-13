@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?
 
   def current_user
-    if session[:email]
-      @current_user ||= Attendee.find(session[:eamil])
+    if session[:id]
+      @current_user ||= Attendee.find(session[:id])
     else
       @current_user = nil
     end

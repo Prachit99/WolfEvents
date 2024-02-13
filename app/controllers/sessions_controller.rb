@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   def create
     attendee = Attendee.authenticate(params[:email], params[:password])
     if attendee
-      session[:attendee] = attendee.id
+      session[:id] = attendee.id
       redirect_to root_url
     else
       flash.now[:alert] = "Email or password is invalid"
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:attendee] = nil
+    session[:id] = nil
     redirect_to root_url
   end
 end
