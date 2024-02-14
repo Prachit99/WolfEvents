@@ -4,4 +4,5 @@ class Room < ApplicationRecord
 
   validates :room_cap ,presence:true
   validates :room_loc ,presence:true
+
 end
