@@ -47,10 +47,29 @@
   </div>
 
   <div>
-
+    <%#= form.label :room_id, "Select Room" %>
+    <%= form.hidden_field :room_id, id: "selected_room_id" %>
+    <button type="button" id="select-room-button" class="btn btn-primary">Select Room</button>
+    <!-- Dropdown with rooms (initially hidden) -->
+    <div id="room-dropdown" style="display: none;">
+      <% if @available_rooms.present? %>
+        <%= form.collection_select(:room_id, @available_rooms, :id, :room_loc, { prompt: 'Select a Room' }) %>
+      <% else %>
+        <p>No available rooms.</p>
+      <% end %>
+    </div>
   </div>
 
   <div>
     <%= form.submit %>
   </div>
 <% end %>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#select-room-button").on("click", function() {
+            $("#room-dropdown").toggle();
+        });
+    });
+</script>

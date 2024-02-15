@@ -1,4 +1,5 @@
 class AttendeesController < ApplicationController
+  skip_before_action :authorized, only: [:new, :create]
   before_action :set_attendee, only: %i[ show edit update destroy ]
 
   # GET /attendees or /attendees.json
