@@ -5,17 +5,12 @@
   Hello <%= current_admin.name %>.
   <%= link_to 'View all event', events_path %><br>
   <%= link_to "Logout", logout_path %>
-<% elsif !current_admin %>
-  <% if current_user %>
+<% elsif current_user %>
     Hello <%= current_user.name %>.
     <%= link_to 'View all event', events_path %><br>
     <%= link_to 'View event history', event_tickets_path %><br>
     <%= link_to "Logout", logout_path %>
-  <% else %>>
+<% else %>>
     <%= link_to "Signup", signup_path %> or
     <%= link_to "Login", login_path %>
-  <% end %>
-<% else %>>
-  <%= link_to "Signup", signup_path %> or
-  <%= link_to "Login", login_path %>
 <% end %>
