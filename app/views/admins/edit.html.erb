@@ -1,8 +1,15 @@
 <h1>Editing admin</h1>
 
-<%= render "form", admin: @admin %>
+<%= form_with model: @admin, url: admin_path(@admin), method: :patch, local: true do |f| %>
+  Email: <%= @admin.email %><br>
+  Password: <%= @admin.password %><br>
+  Name: <br><%= f.text_field :name %><br>
+  Phone: <br><%= f.text_field :phone %><br>
+  Address: <br><%= f.text_field :address %><br>
+  Credit Card: <br><%= f.text_field :credit_card %><br>
+  <%= f.submit %><br>
 
-<br>
+<% end %>
 
 <div>
   <%= link_to "Show this admin", @admin %> |
