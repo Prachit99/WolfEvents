@@ -3,8 +3,13 @@
 <%= render @event %>
 
 <div>
-  <%= link_to "Edit this event", edit_event_path(@event) %> |
   <%= link_to "Back to events", events_path %>
 
-  <%= button_to "Destroy this event", @event, method: :delete %>
+  <% if current_admin %>
+    <%= link_to "Edit this event", edit_event_path(@event) %>
+    <%= button_to "Destroy this event", @event, method: :delete %>
+  <% end %>
+  <% if current_user %>
+    <%= link_to "Sign up for this event", event_ticket_path(@event) %>
+  <% end %>
 </div>

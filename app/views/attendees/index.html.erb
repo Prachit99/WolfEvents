@@ -3,12 +3,23 @@
 <h1>Attendees</h1>
 
 <div id="attendees">
-  <% @attendees.each do |attendee| %>
-    <%= render attendee %>
-    <p>
-      <%= link_to "Show this attendee", attendee %>
-    </p>
-  <% end %>
-</div>
 
-<%= link_to "New attendee", new_attendee_path %>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Profile</th>
+      </tr>
+      <% @attendees.each do |attendee| %>
+          <tr>
+            <td><%= attendee.__id__ %></td>
+            <td><%= attendee.name %></td>
+            <td><%= link_to "Show this attendee", attendee %></td>
+          </tr>
+      <% end %>
+    </table>
+</div>
+<% if current_admin %>
+    <%= link_to "New attendee", new_attendee_path %>
+<% end %>
+<%= link_to "Home Page", root_path %>

@@ -3,12 +3,22 @@
 <h1>Rooms</h1>
 
 <div id="rooms">
-  <% @rooms.each do |room| %>
-    <%= render room %>
-    <p>
-      <%= link_to "Show this room", room %>
-    </p>
-  <% end %>
+    <table>
+      <tr>
+        <th>Room ID</th>
+        <th>Room Location</th>
+        <th>Room Capacity</th>
+        <th>Room Link</th>
+      </tr>
+      <% @rooms.each do |room| %>
+      <tr>
+        <td><%= room.__id__ %></td>
+        <td><%= room.room_loc %></td>
+        <td><%= room.room_cap %></td>
+        <td><%= link_to "Show this room", room %></td>
+      </tr>
+      <% end %>
+    </table>
 </div>
 
 <%= link_to "New room", new_room_path %>
