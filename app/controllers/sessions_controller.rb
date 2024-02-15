@@ -6,7 +6,11 @@ class SessionsController < ApplicationController
 
   def create
     attendee = Attendee.authenticate(params[:email], params[:password])
-    if attendee
+    admin = Admin.authenticate(params[:email], params[:password])
+    if admin
+      session[:id] = admin.id
+      redirect_to root_url
+    elsif attendee
       session[:id] = attendee.id
       redirect_to root_url
     else
