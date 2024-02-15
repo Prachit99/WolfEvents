@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     attendee = Attendee.authenticate(params[:email], params[:password])
     admin = Admin.authenticate(params[:email], params[:password])
     if admin
-      session[:id] = admin.id
+      session[:admin_id] = admin.id
       redirect_to root_url
     elsif attendee
       session[:id] = attendee.id
