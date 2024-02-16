@@ -13,6 +13,7 @@ class Event < ApplicationRecord
 
   scope :upcoming, -> { where('event_date >= ?', Date.today) }
   scope :not_sold_out, -> { where('no_of_seats > 0') }
+  scope :past, -> { where("event_date < ? OR (event_date = ? AND event_end_time < ?)", Date.today, Date.today, Time.now.strftime("%H:%M")) }
 
   def self.filter(filter_type, filter_value)
     scoped_events = case filter_type

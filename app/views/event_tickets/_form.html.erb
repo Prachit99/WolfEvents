@@ -12,11 +12,59 @@
   <% end %>
 
   <div>
+    <% if @event.present? %>
+      <p><strong>Event Name:</strong> <%= @event.event_name %></p>
+      <p><strong>Event Room:</strong> <%= @event.room.room_loc %></p>
+      <p><strong>Event Start Time:</strong> <%= @event.event_start_time %></p>
+      <p><strong>Event End Time:</strong> <%= @event.event_end_time %></p>
+      <p><strong>Event Ticket Price per person: </strong><%= @event.ticket_price %></p>
+      <div>
+        <%= form.label :seats_to_book, style: "display: block" %>
+        <%= form.number_field :seats_to_book, min: 1 %>
+      </div>
+    <% else %>
+      <p>No event details available</p>
+    <% end %>
+
+    <!-- "Book Tickets" link with toggle functionality -->
+    <div>
+      <%= link_to "Book Tickets", "javascript:void(0);", id: "book_tickets_link" %>
+    </div>
+
+    <!-- "Amount to Pay" section -->
+    <div id="amount_to_pay_section" style="display: none;">
+      <p><strong>Amount to Pay: </strong><span id="amount_to_pay">0</span></p>
+    </div>
+
+
     <%= form.label :confirmation_num, style: "display: block" %>
     <%= form.text_field :confirmation_num %>
-  </div>
 
-  <div>
-    <%= form.submit %>
+    <div>
+      <%= form.submit %>
+    </div>
   </div>
 <% end %>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Toggle "Amount to Pay" section when "Book Tickets" link is clicked
+        $("#book_tickets_link").on("click", function() {
+            $("#amount_to_pay_section").toggle();
+            updateAmountToPay();
+        });
+
+        // Calculate amount to pay when seats_to_book changes
+        $("#event_ticket_seats_to_book").on("input", function() {
+            updateAmountToPay();
+        });
+
+        function updateAmountToPay() {
+            var seatsToBook = $("#event_ticket_seats_to_book").val();
+            var ticketPrice = <%= @event.ticket_price %>; // Fetch ticket price from server if needed
+            var amountToPay = seatsToBook * ticketPrice;
+            $("#amount_to_pay").text(amountToPay);
+        }
+    });
+</script>
