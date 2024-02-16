@@ -14,4 +14,28 @@ class Event < ApplicationRecord
   scope :upcoming, -> { where('event_date >= ?', Date.today) }
   scope :not_sold_out, -> { where('no_of_seats > 0') }
   scope :past, -> { where("event_date < ? OR (event_date = ? AND event_end_time < ?)", Date.today, Date.today, Time.now.strftime("%H:%M")) }
+
+  def self.filter(filter_type, filter_value)
+    scoped_events = case filter_type
+                    when 'category'
+                      where(event_cat: filter_value)
+                    when 'date'
+                      where(event_date: filter_value)
+                    when 'price'
+                      where(ticket_price: filter_value)
+                    else
+                      all
+                    end
+
+    scoped_events.order(:event_date)
+  end
+  # scope :visible_to_user, ->(user) {
+  #   if user&.admin?
+  #     all # Admin can see all events
+  #   elsif user&.attendee?
+  #     upcoming.not_sold_out # Attendees can see upcoming events that are not sold out
+  #   else
+  #     none # Default to no events for other roles (optional)
+  #   end
+  # }
 end
