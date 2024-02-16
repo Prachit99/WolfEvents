@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @attendee %>
-
+<p><strong>User ID:</strong> <%= @attendee.id %></p>
 <div>
   <%= link_to "Edit this attendee", edit_attendee_path(@attendee) %> <br><br>
   <% if current_admin %>
