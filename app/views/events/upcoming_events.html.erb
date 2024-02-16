@@ -1,0 +1,18 @@
+<h1>All Upcoming Events</h1>
+
+<% if @upcoming_events.any? %>
+  <ul>
+    <% @upcoming_events.each do |event| %>
+      <li>
+        <strong>Event Name:</strong> <%= event.event_name %><br>
+        <strong>Event Date:</strong> <%= event.event_date %><br>
+        <strong>No. of seats</strong> <%= event.no_of_seats %><br>
+        <!-- Add other event details as needed -->
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No upcoming events available.</p>
+<% end %>
+
+<%= link_to 'Back to Home', root_path %>

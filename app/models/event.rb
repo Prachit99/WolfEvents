@@ -13,13 +13,5 @@ class Event < ApplicationRecord
 
   scope :upcoming, -> { where('event_date >= ?', Date.today) }
   scope :not_sold_out, -> { where('no_of_seats > 0') }
-  # scope :visible_to_user, ->(user) {
-  #   if user&.admin?
-  #     all # Admin can see all events
-  #   elsif user&.attendee?
-  #     upcoming.not_sold_out # Attendees can see upcoming events that are not sold out
-  #   else
-  #     none # Default to no events for other roles (optional)
-  #   end
-  # }
+  scope :past, -> { where("event_date < ? OR (event_date = ? AND event_end_time < ?)", Date.today, Date.today, Time.now.strftime("%H:%M")) }
 end

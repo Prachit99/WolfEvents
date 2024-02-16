@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   resources :reviews
   resources :event_tickets
-  resources :events
+  resources :events do
+    get 'upcoming_events', on: :collection
+    get 'past_events', on: :collection
+  end
   resources :attendees
   resources :rooms
   resources :admins
