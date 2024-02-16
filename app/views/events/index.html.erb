@@ -3,22 +3,38 @@
 <h1>Events</h1>
 
 <div id="events">
-    <table>
+  <% if current_admin %>
+    <%= form_tag events_path, method: :get, id: 'events-filter-form' do %>
+      <label for="filter_type">Filter Type:</label>
+      <%= select_tag 'filter_type', options_for_select(['category', 'event_date', 'price']), class: 'form-control' %>
+
+      <label for="filter_value">Filter Value:</label>
+      <%= text_field_tag 'filter_value', nil, class: 'form-control' %>
+
+      <%= submit_tag 'Apply Filter', class: 'btn btn-primary' %>
+    <% end %>
+  <% end %>
+
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Event Name</th>
+      <th>Event Date</th>
+      <th>Event Link</th>
+    </tr>
+    <% @events.each do |event| %>
       <tr>
-        <th>ID</th>
-        <th>Event Name</th>
-        <th>Event Link</th>
-      </tr>
-      <% @events.each do |event| %>
-      <tr>
-        <td><%= event.__id__ %></td>
+        <td><%= event.id %></td>
         <td><%= event.event_name %></td>
+        <td><%= event.event_date %></td>
         <td><%= link_to "Show this event", event %></td>
       </tr>
-      <% end %>
-    </table>
+    <% end %>
+  </table>
 </div>
+
 <% if current_admin %>
-    <%= link_to "New event", new_event_path %>
-<% end %>>
+  <%= link_to "New event", new_event_path %>
+<% end %>
+
 <%= link_to "Home Page", root_path %>
