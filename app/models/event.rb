@@ -2,6 +2,7 @@ class Event < ApplicationRecord
   has_many :attendees
   has_many :event_tickets
   belongs_to :room
+  has_many :reviews
 
   validates :event_name, presence: true
   validates :event_cat, presence: true
@@ -16,18 +17,16 @@ class Event < ApplicationRecord
   scope :past, -> { where("event_date < ? OR (event_date = ? AND event_end_time < ?)", Date.today, Date.today, Time.now.strftime("%H:%M")) }
 
   def self.filter(filter_type, filter_value)
-    scoped_events = case filter_type
-                    when 'category'
-                      where(event_cat: filter_value)
-                    when 'date'
-                      where(event_date: filter_value)
-                    when 'price'
-                      where(ticket_price: filter_value)
-                    else
-                      all
-                    end
-
-    scoped_events.order(:event_date)
+    case filter_type
+    when 'category'
+      where(event_cat: filter_value)
+    when 'event_date'
+      where('event_date = ?', filter_value.to_date)
+    when 'price'
+      where(ticket_price: filter_value)
+    else
+      all
+    end
   end
   # scope :visible_to_user, ->(user) {
   #   if user&.admin?

@@ -1,13 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Event tickets</h1>
+<h1>Your Event Tickets</h1>
 
 <div id="event_tickets">
-  <% @event_tickets.each do |event_ticket| %>
-    <%= render event_ticket %>
-    <p>
-      <%= link_to "Show this event ticket", event_ticket %>
-    </p>
+  <% current_user.attended_events.each do |attended_event| %>
+
+    <% attended_event.event_tickets.each do |event_ticket| %>
+      <h2><%= attended_event.event_name %></h2>
+      <%= render event_ticket %>
+      <p>
+        <%= link_to "Show this event ticket", event_ticket %>
+      </p>
+    <% end %>
   <% end %>
 </div>
 

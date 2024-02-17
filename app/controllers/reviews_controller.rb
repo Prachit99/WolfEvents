@@ -3,7 +3,11 @@ class ReviewsController < ApplicationController
 
   # GET /reviews or /reviews.json
   def index
-    @reviews = Review.all
+    @reviews = if params[:filter_type].present? && params[:filter_value].present?
+                 Review.filter(params[:filter_type], params[:filter_value])
+               else
+                 Review.all
+               end
   end
 
   # GET /reviews/1 or /reviews/1.json
@@ -22,6 +26,8 @@ class ReviewsController < ApplicationController
   # POST /reviews or /reviews.json
   def create
     @review = Review.new(review_params)
+    @review.attendee = current_user
+    @review.event = Event.find(params[:event_id])
 
     respond_to do |format|
       if @review.save
@@ -65,6 +71,6 @@ class ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.require(:review).permit(:rating, :feedback)
+      params.require(:review).permit(:rating, :feedback, :attendee_id, :event_id)
     end
 end

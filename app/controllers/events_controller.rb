@@ -5,8 +5,13 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
-    @events = Event.filter(params[:filter_type], params[:filter_value])
+    @events = Event.filter(params[:filter_type], params[:filter_value]).order(:event_date)
     @upcoming_events = Event.upcoming.not_sold_out
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @events }
+    end
   end
 
   # GET /events/1 or /events/1.json

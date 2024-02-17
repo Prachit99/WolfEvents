@@ -3,17 +3,18 @@
 <h1>Events</h1>
 
 <div id="events">
-  <% if current_admin %>
     <%= form_tag events_path, method: :get, id: 'events-filter-form' do %>
-      <label for="filter_type">Filter Type:</label>
-      <%= select_tag 'filter_type', options_for_select(['category', 'event_date', 'price']), class: 'form-control' %>
+    <label for="filter_type">Filter Type:</label>
+    <%= select_tag 'filter_type', options_for_select(['category', 'event_date', 'price']), class: 'form-control' %>
 
-      <label for="filter_value">Filter Value:</label>
-      <%= text_field_tag 'filter_value', nil, class: 'form-control' %>
+    <label for="filter_value">Filter Value:</label>
+    <%= text_field_tag 'filter_value', nil, class: 'form-control' %>
 
-      <%= submit_tag 'Apply Filter', class: 'btn btn-primary' %>
+    <%= submit_tag 'Apply Filter', class: 'btn btn-primary' %>
+
+    <%= link_to 'Display All Events', events_path, class: 'btn btn-secondary', style: 'margin-left: 10px;' %>
     <% end %>
-  <% end %>
+
 
   <table>
     <tr>
