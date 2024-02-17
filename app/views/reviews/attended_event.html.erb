@@ -1,7 +1,7 @@
 <%= form_with(model: review) do |form| %>
 
   <div>
-    <%= form.label :event_id, 'Select Attended Event:' %>
+    <label for="event_id">Select Attended Event:</label>
     <%= select_tag 'event_id', options_from_collection_for_select(current_user.attended_events, 'id', 'event_name') %>
   </div>
 

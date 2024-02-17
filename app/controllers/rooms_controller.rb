@@ -8,6 +8,11 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1 or /rooms/1.json
   def show
+    # Ensure that only admin can access the rooms
+    admin = current_admin
+    unless admin
+      redirect_to root_path, notice: "You are not authorized to view rooms."
+    end
   end
 
   # GET /rooms/new

@@ -5,8 +5,13 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
-    @events = Event.all
+    @events = Event.filter(params[:filter_type], params[:filter_value]).order(:event_date)
     @upcoming_events = Event.upcoming.not_sold_out
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @events }
+    end
   end
 
   # GET /events/1 or /events/1.json
@@ -64,22 +69,11 @@ class EventsController < ApplicationController
   end
 
   def upcoming_events
-    if params[:category].present?
-      @events = @events.where(event_cat: params[:category])
-    end
+    @upcoming_events = Event.upcoming.not_sold_out
+  end
 
-    if params[:date].present?
-      @events = @events.where(event_date: params[:date])
-    end
-
-    if params[:price_range].present?
-      min_price, max_price = params[:price_range].split('-').map(&:to_f)
-      @events = @events.where(ticket_price: min_price..max_price)
-    end
-
-    if params[:search].present?
-      @events = @events.where('event_name ILIKE ?', "%#{params[:search]}%")
-    end
+  def past_events
+    @past_events = Event.past
   end
 
   private
@@ -93,16 +87,4 @@ class EventsController < ApplicationController
       params.require(:event).permit(:event_name, :event_cat, :event_date, :event_start_time, :event_end_time, :ticket_price, :no_of_seats, :room_id)
     end
 
-    # def rooms_available?(event,room)
-    #   start_time = event.event_start_time
-    #   end_time = event.event_start_time
-    #   reserved_room_ids = Event.where(event_date: event.event_date)
-    #                            .where.not(
-    #     '(? >= event_start_time AND ? <= event_end_time) OR (? >= event_start_time AND ? <= event_end_time)',
-    #     start_time, start_time,
-    #     end_time, end_time
-    #   )
-    #                            .pluck(:room_id)
-    #   !reserved_room_ids.include?(room.id) && !room.reserved
-    # end
 end

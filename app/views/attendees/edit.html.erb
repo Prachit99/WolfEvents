@@ -5,6 +5,8 @@
 <br>
 
 <div>
-  <%= link_to "Show this attendee", @attendee %> |
-  <%= link_to "Back to attendees", attendees_path %>
+  <%= link_to "Back", @attendee %><br>
+  <% if current_admin %>
+    <%= link_to "Back to attendees", attendees_path %>
+  <% end %>
 </div>

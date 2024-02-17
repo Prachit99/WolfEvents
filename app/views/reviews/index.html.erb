@@ -2,13 +2,46 @@
 
 <h1>Reviews</h1>
 
+<%= link_to "New review", new_review_path %>
+
+<%= form_tag reviews_path, method: :get, id: 'reviews-filter-form' do %>
+  <label for="filter_type">Filter by:</label>
+  <%= select_tag 'filter_type', options_for_select(['Event Name', 'Attendee Name']), class: 'form-control' %>
+
+  <label for="filter_value">Filter Value:</label>
+  <%= text_field_tag 'filter_value', nil, class: 'form-control' %>
+
+  <%= submit_tag 'Apply Filter', class: 'btn btn-primary' %>
+<% end %>
+
 <div id="reviews">
-  <% @reviews.each do |review| %>
-    <%= render review %>
-    <p>
-      <%= link_to "Show this review", review %>
-    </p>
-  <% end %>
+  <table>
+    <tr>
+      <th>Event Name</th>
+      <th>Attendee Name</th>
+      <th>Rating</th>
+      <th>Feedback</th>
+      <th>Action</th>
+      <th>Action</th>
+    </tr>
+
+    <% @reviews.each do |review| %>
+      <tr>
+        <td><%= Event.find(review.event_id).event_name %></td>
+        <td><%= Attendee.find(review.attendee_id).name %></td>
+        <td><%= review.rating %></td>
+        <td><%= review.feedback %></td>
+        <td><%= link_to "Show this review", review %></td>
+        <% if review.attendee_id == current_user.id %>
+          <td><%= link_to "Edit", edit_review_path(review) %></td>
+          <td><%= button_to "Delete", review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+          <td></td>
+          <td></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
 </div>
 
-<%= link_to "New review", new_review_path %>
+<%= link_to "Back to Home Page", root_path %>

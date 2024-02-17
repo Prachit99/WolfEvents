@@ -3,15 +3,39 @@
 <h1>Events</h1>
 
 <div id="events">
-  <% @events.each do |event| %>
-    <%= render event %>
-    <p>
-      <%= link_to "Show this event", event %>
-    </p>
-  <% end %>
+    <%= form_tag events_path, method: :get, id: 'events-filter-form' do %>
+    <label for="filter_type">Filter Type:</label>
+    <%= select_tag 'filter_type', options_for_select(['category', 'event_date', 'price']), class: 'form-control' %>
+
+    <label for="filter_value">Filter Value:</label>
+    <%= text_field_tag 'filter_value', nil, class: 'form-control' %>
+
+    <%= submit_tag 'Apply Filter', class: 'btn btn-primary' %>
+
+    <%= link_to 'Display All Events', events_path, class: 'btn btn-secondary', style: 'margin-left: 10px;' %>
+    <% end %>
+
+
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Event Name</th>
+      <th>Event Date</th>
+      <th>Event Link</th>
+    </tr>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.id %></td>
+        <td><%= event.event_name %></td>
+        <td><%= event.event_date %></td>
+        <td><%= link_to "Show this event", event %></td>
+      </tr>
+    <% end %>
+  </table>
 </div>
+
 <% if current_admin %>
-    <%= link_to "New event", new_event_path %>
-<% elsif !current_admin %>
-  <p>You are not authorized to creat a new event.</p>
-<% end %>>
+  <%= link_to "New event", new_event_path %>
+<% end %>
+
+<%= link_to "Home Page", root_path %>

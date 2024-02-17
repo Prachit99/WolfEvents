@@ -1,22 +1,155 @@
-<%= form_with(model: event_ticket) do |form| %>
-  <% if event_ticket.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(event_ticket.errors.count, "error") %> prohibited this event_ticket from being saved:</h2>
+<%#= form_with(model: event_ticket) do |form| %>
+  <%# if event_ticket.errors.any? %>
+<!--    <div style="color: red">-->
+<!--      <h2><%#= pluralize(event_ticket.errors.count, "error") %> prohibited this event_ticket from being saved:</h2>-->
 
-      <ul>
-        <% event_ticket.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+<!--      <ul>-->
+        <%# event_ticket.errors.each do |error| %>
+<!--          <li><%#= error.full_message %></li>-->
+        <%# end %>
+<!--      </ul>-->
+<!--    </div>-->
+  <%# end %>
+
+<!--  <div>-->
+    <%# if @event.present? %>
+<!--      <p><strong>Event Name:</strong> <%#= @event.event_name %></p>-->
+<!--      <p><strong>Event Room:</strong> <%#= @event.room.room_loc %></p>-->
+<!--      <p><strong>Event Start Time:</strong> <%#= @event.event_start_time %></p>-->
+<!--      <p><strong>Event End Time:</strong> <%#= @event.event_end_time %></p>-->
+<!--      <p><strong>Event Ticket Price per person: </strong><%#= @event.ticket_price %></p>-->
+<!--      <div>-->
+        <%#= form.label :seats_to_book, style: "display: block" %>
+        <%#= form.number_field :seats_to_book, min: 1 %>
+<!--      </div>-->
+    <%# else %>
+<!--      <p>No event details available</p>-->
+    <%# end %>
+
+    <!-- "Book Tickets" link with toggle functionality -->
+<!--    <div>-->
+      <%#= link_to "Book Tickets", "javascript:void(0);", id: "book_tickets_link" %>
+<!--    </div>-->
+
+    <!-- "Amount to Pay" section -->
+<!--    <div id="amount_to_pay_section" style="display: none;">-->
+<!--      <p><strong>Amount to Pay: </strong><span id="amount_to_pay">0</span></p>-->
+<!--    </div>-->
+
+
+    <%#= form.label :confirmation_num, style: "display: block" %>
+    <%#= form.text_field :confirmation_num %>
+
+<!--    <div>-->
+      <%#= form.submit %>
+<!--    </div>-->
+<!--  </div>-->
+<%# end %>
+
+<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--        // Toggle "Amount to Pay" section when "Book Tickets" link is clicked-->
+<!--        $("#book_tickets_link").on("click", function() {-->
+<!--            $("#amount_to_pay_section").toggle();-->
+<!--            updateAmountToPay();-->
+<!--        });-->
+
+<!--        // Calculate amount to pay when seats_to_book changes-->
+<!--        $("#event_ticket_seats_to_book").on("input", function() {-->
+<!--            updateAmountToPay();-->
+<!--        });-->
+
+<!--        function updateAmountToPay() {-->
+<!--            var seatsToBook = $("#event_ticket_seats_to_book").val();-->
+<!--            var ticketPrice = <%#= @event.ticket_price %>; // Fetch ticket price from server if needed-->
+<!--            var amountToPay = seatsToBook * ticketPrice;-->
+<!--            $("#amount_to_pay").text(amountToPay);-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+
+
+<!-- app/views/event_tickets/new.html.erb -->
+
+<h1>New Event Ticket</h1>
+
+<%= form_with(model: @event_ticket, url: event_tickets_path) do |form| %>
+  <% if @event_ticket.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@event_ticket.errors.count, "error") %> prohibited this event ticket from being saved:</h2>
+
+        <ul>
+  <% @event_ticket.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+  <% end %>
+        </ul>
+      </div>
   <% end %>
 
-  <div>
-    <%= form.label :confirmation_num, style: "display: block" %>
-    <%= form.text_field :confirmation_num %>
+
+  <div class="field">
+    <%= form.hidden_field :attendee_id, value: current_user.id %>
   </div>
+
+
+  <div class="field">
+    <%= form.label :event_id %>
+    <%= form.select :event_id, options_for_select(Event.upcoming.not_sold_out.map { |event| [ "#{event.event_name} (Room: #{event.room_id})", event.id ] }) %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :room_id %>
+    <%= form.select :room_id, options_for_select(Room.all.map { |room| [ room.id ] }) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :confirmation_num %>
+    <%= form.text_area :confirmation_num, value: "123" %>
+  </div>
+
+<!--  <div>-->
+    <%#= link_to "Book Tickets", "javascript:void(0);", id: "book_tickets_link" %>
+<!--  </div>-->
+
+  <!-- "Amount to Pay" section -->
+<!--  <div id="amount_to_pay_section" style="display: none;">-->
+<!--    <p><strong>Amount to Pay: </strong><span id="amount_to_pay">0</span></p>-->
+<!--  </div>-->
 
   <div>
     <%= form.submit %>
   </div>
 <% end %>
+
+
+<!--<script type="text/javascript">-->
+<!--    function calculateTotalPrice() {-->
+<!--        var price = "<%#= @event.ticket_price %>";-->
+<!--        document.getElementById('total_cost').value = document.getElementById('seats_to_book').value * price;-->
+<!--        $("#amount_to_pay").text(total_cost);-->
+<!--    }-->
+<!--</script>-->
+<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--        // Toggle "Amount to Pay" section when "Book Tickets" link is clicked-->
+<!--        $("#book_tickets_link").on("click", function() {-->
+<!--            $("#amount_to_pay_section").toggle();-->
+<!--            updateAmountToPay();-->
+<!--        });-->
+
+<!--        // Calculate amount to pay when seats_to_book changes-->
+<!--        $("#event_ticket_seats_to_book").on("input", function() {-->
+<!--            updateAmountToPay();-->
+<!--        });-->
+
+<!--        function updateAmountToPay() {-->
+<!--            var seatsToBook = $("#event_ticket_seats_to_book").val();-->
+<!--            var ticketPrice = <%#= @event.ticket_price %>; // Fetch ticket price from server if needed-->
+<!--            var amountToPay = seatsToBook * ticketPrice;-->
+<!--            $("#amount_to_pay").text(amountToPay);-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->

@@ -1,10 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @attendee %>
-
+<p><strong>User ID:</strong> <%= @attendee.id %></p>
 <div>
-  <%= link_to "Edit this attendee", edit_attendee_path(@attendee) %> |
-  <%= link_to "Back to attendees", attendees_path %>
-
-  <%= button_to "Destroy this attendee", @attendee, method: :delete %>
+  <%= link_to "Edit this attendee", edit_attendee_path(@attendee) %> <br><br>
+  <% if current_admin %>
+    <%= link_to "Back to attendees", attendees_path %> <br><br>
+  <% end %>
+  <%= button_to "Destroy this attendee", @attendee, method: :delete %> <br>
+  <%= link_to "Back to Home Page", root_path %> <br><br>
 </div>

@@ -3,6 +3,7 @@ class Admin < ApplicationRecord
     admin = Admin.find_by(email: email)
     return admin if admin && admin.password == password
   end
+
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, uniqueness: true

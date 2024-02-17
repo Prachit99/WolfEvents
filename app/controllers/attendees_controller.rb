@@ -5,10 +5,20 @@ class AttendeesController < ApplicationController
   # GET /attendees or /attendees.json
   def index
     @attendees = Attendee.all
+    admin = current_admin
+    unless admin
+      redirect_to root_path, notice: "You are not authorized to view rooms."
+    end
   end
 
   # GET /attendees/1 or /attendees/1.json
   def show
+    @attendee = Attendee.find(params[:id])
+    @current_user = current_user
+    # Ensure that the current attendee can only access their own profile
+    if @attendee != @current_user and !current_admin
+      redirect_to root_path, notice: "You are not authorized to view other profiles."
+    end
   end
 
   # GET /attendees/new
