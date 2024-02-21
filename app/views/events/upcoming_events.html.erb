@@ -6,8 +6,9 @@
       <li>
         <strong>Event Name:</strong> <%= event.event_name %><br>
         <strong>Event Date:</strong> <%= event.event_date %><br>
+        <strong>Ticket Price</strong> <%= event.ticket_price %><br>
         <strong>No. of seats</strong> <%= event.no_of_seats %><br>
-        <!-- Add other event details as needed -->
+        <%= link_to "Book a Ticket", new_event_ticket_path %><br>
       </li>
     <% end %>
   </ul>

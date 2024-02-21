@@ -18,16 +18,22 @@
 
   <table>
     <tr>
-      <th>ID</th>
+      <th>Event ID</th>
       <th>Event Name</th>
+      <th>Event Category</th>
       <th>Event Date</th>
+      <th>Ticket Price</th>
+      <th>No. of Seats</th>
       <th>Event Link</th>
     </tr>
     <% @events.each do |event| %>
       <tr>
         <td><%= event.id %></td>
         <td><%= event.event_name %></td>
+        <td><%= event.event_cat %></td>
         <td><%= event.event_date %></td>
+        <td>$ <%= event.ticket_price %></td>
+        <td><%= event.no_of_seats %></td>
         <td><%= link_to "Show this event", event %></td>
       </tr>
     <% end %>
