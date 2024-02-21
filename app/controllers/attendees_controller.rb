@@ -63,8 +63,12 @@ class AttendeesController < ApplicationController
     @attendee.destroy!
 
     respond_to do |format|
-      format.html { redirect_to attendees_url, notice: "Attendee was successfully destroyed." }
-      format.json { head :no_content }
+      if current_user
+        reset_session
+        format.html{redirect_to root_path, notice: "Account successfully destroyed." }
+      else
+        format.html { redirect_to attendees_url, notice: "Attendee was successfully destroyed." }
+      end
     end
   end
 

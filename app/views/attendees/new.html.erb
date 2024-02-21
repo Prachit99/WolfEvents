@@ -5,5 +5,10 @@
 <br>
 
 <div>
-  <%= link_to "Back to attendees", attendees_path %>
+  <% if current_admin %>
+    <%= link_to "Back to attendees", attendees_path %>
+  <% else %>
+    <%= link_to "Home Page", root_path %>
+  <% end %>
 </div>
+
