@@ -52,8 +52,8 @@
     <button type="button" id="select-room-button" class="btn btn-primary">Select Room</button>
     <!-- Dropdown with rooms (initially hidden) -->
     <div id="room-dropdown" style="display: none;">
-      <% if @available_rooms.present? %>
-        <%= form.collection_select(:room_id, @available_rooms, :id, :room_loc, { prompt: 'Select a Room' }) %>
+      <% if @rooms.present? %>
+        <%= form.collection_select(:room_id, @rooms, :id, :room_loc, { prompt: 'Select a Room' }) %>
       <% else %>
         <p>No available rooms.</p>
       <% end %>

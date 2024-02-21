@@ -1,8 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
 
-  #@available_rooms = Room.available_rooms('2024-02-14', '12:00', '14:00')
-
   # GET /events or /events.json
   def index
     @events = Event.filter(params[:filter_type], params[:filter_value]).order(:event_date)
@@ -21,7 +19,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    @available_rooms = Room.where(reserved:false)
+    @rooms = Room.all
   end
 
   # GET /events/1/edit
@@ -32,10 +30,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     respond_to do |format|
-      room = Room.find(params[:event][:room_id])
-      @event.room = room
         if @event.save
-          room.update(reserved: true)
           format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
           format.json { render :show, status: :created, location: @event }
         else

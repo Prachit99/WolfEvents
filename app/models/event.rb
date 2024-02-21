@@ -28,13 +28,5 @@ class Event < ApplicationRecord
       all
     end
   end
-  # scope :visible_to_user, ->(user) {
-  #   if user&.admin?
-  #     all # Admin can see all events
-  #   elsif user&.attendee?
-  #     upcoming.not_sold_out # Attendees can see upcoming events that are not sold out
-  #   else
-  #     none # Default to no events for other roles (optional)
-  #   end
-  # }
+
 end
