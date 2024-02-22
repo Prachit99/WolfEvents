@@ -46,28 +46,6 @@
 <!--  </div>-->
 <%# end %>
 
-<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-<!--<script>-->
-<!--    $(document).ready(function() {-->
-<!--        // Toggle "Amount to Pay" section when "Book Tickets" link is clicked-->
-<!--        $("#book_tickets_link").on("click", function() {-->
-<!--            $("#amount_to_pay_section").toggle();-->
-<!--            updateAmountToPay();-->
-<!--        });-->
-
-<!--        // Calculate amount to pay when seats_to_book changes-->
-<!--        $("#event_ticket_seats_to_book").on("input", function() {-->
-<!--            updateAmountToPay();-->
-<!--        });-->
-
-<!--        function updateAmountToPay() {-->
-<!--            var seatsToBook = $("#event_ticket_seats_to_book").val();-->
-<!--            var ticketPrice = <%#= @event.ticket_price %>; // Fetch ticket price from server if needed-->
-<!--            var amountToPay = seatsToBook * ticketPrice;-->
-<!--            $("#amount_to_pay").text(amountToPay);-->
-<!--        }-->
-<!--    });-->
-<!--</script>-->
 
 
 <!-- app/views/event_tickets/new.html.erb -->
@@ -91,32 +69,39 @@
   <div class="field">
     <%= form.hidden_field :attendee_id, value: current_user.id %>
   </div>
-
-
   <div class="field">
-    <%= form.label :event_id %>
-    <%= form.select :event_id, options_for_select(Event.upcoming.not_sold_out.map { |event| [ "#{event.event_name} (Room: #{event.room_id})", event.id ] }) %>
+    <%= form.hidden_field :event_id, value: @event.id %>
   </div>
-
-
   <div class="field">
-    <%= form.label :room_id %>
-    <%= form.select :room_id, options_for_select(Room.all.map { |room| [ room.id ] }) %>
+    <%= form.hidden_field :room_id, value: @event.room_id %>
   </div>
 
   <div class="field">
-    <%= form.label :confirmation_num %>
-    <%= form.text_area :confirmation_num, value: "123" %>
+    <p><strong>Event Name: </strong>
+      <%= @event.event_name %></p>
+  </div>
+  <div class="field">
+    <p><strong>Event Room: </strong>
+      <%= @event.room.room_loc %></p>
+  </div>
+  <div class="field">
+    <p><strong>Event Ticket Price: </strong>
+      <%= @event.ticket_price %></p>
+  </div>
+  <div class="field">
+    <p><strong>No. of Seats: </strong>
+    <%= @event.no_of_seats %></p>
+  </div>
+  <div class="field">
+    <% no_of_seats = @event.no_of_seats %>
+    <%= form.label :no_of_seats %>
+    <%= form.number_field :quantity, :id => 'no_of_seats', min: 1, max: no_of_seats, onchange: "calculateTotalPrice();" %>
   </div>
 
-<!--  <div>-->
-    <%#= link_to "Book Tickets", "javascript:void(0);", id: "book_tickets_link" %>
-<!--  </div>-->
-
-  <!-- "Amount to Pay" section -->
-<!--  <div id="amount_to_pay_section" style="display: none;">-->
-<!--    <p><strong>Amount to Pay: </strong><span id="amount_to_pay">0</span></p>-->
-<!--  </div>-->
+  <div class="field">
+    <%= form.label :total_cost %>
+    <%= form.text_field :total_cost, :id => 'total_cost', :readonly => true %>
+  </div>
 
   <div>
     <%= form.submit %>
@@ -124,32 +109,10 @@
 <% end %>
 
 
-<!--<script type="text/javascript">-->
-<!--    function calculateTotalPrice() {-->
-<!--        var price = "<%#= @event.ticket_price %>";-->
-<!--        document.getElementById('total_cost').value = document.getElementById('seats_to_book').value * price;-->
-<!--        $("#amount_to_pay").text(total_cost);-->
-<!--    }-->
-<!--</script>-->
-<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-<!--<script>-->
-<!--    $(document).ready(function() {-->
-<!--        // Toggle "Amount to Pay" section when "Book Tickets" link is clicked-->
-<!--        $("#book_tickets_link").on("click", function() {-->
-<!--            $("#amount_to_pay_section").toggle();-->
-<!--            updateAmountToPay();-->
-<!--        });-->
+<script type="text/javascript">
+      function calculateTotalPrice() {
+        var price = "<%= @event.ticket_price %>";
+        document.getElementById('total_cost').value = document.getElementById('no_of_seats').value * price;
+    }
+</script>
 
-<!--        // Calculate amount to pay when seats_to_book changes-->
-<!--        $("#event_ticket_seats_to_book").on("input", function() {-->
-<!--            updateAmountToPay();-->
-<!--        });-->
-
-<!--        function updateAmountToPay() {-->
-<!--            var seatsToBook = $("#event_ticket_seats_to_book").val();-->
-<!--            var ticketPrice = <%#= @event.ticket_price %>; // Fetch ticket price from server if needed-->
-<!--            var amountToPay = seatsToBook * ticketPrice;-->
-<!--            $("#amount_to_pay").text(amountToPay);-->
-<!--        }-->
-<!--    });-->
-<!--</script>-->

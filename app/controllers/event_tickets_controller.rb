@@ -17,6 +17,9 @@ class EventTicketsController < ApplicationController
   def new
     # @event = Event.find(params[:event_id])
     @event_ticket = EventTicket.new
+    if @event.nil?
+      @event = Event.find(params[:event_id])
+    end
   end
 
   # GET /event_tickets/1/edit
@@ -27,6 +30,8 @@ class EventTicketsController < ApplicationController
   def create
     @event_ticket = EventTicket.new(event_ticket_params)
 
+    @event = Event.find(params[:event_ticket][:event_id])
+    @event_ticket.confirmation_num = rand(0..999999)
     respond_to do |format|
       if @event_ticket.save
         format.html { redirect_to event_ticket_url(@event_ticket), notice: "Event ticket was successfully created." }
