@@ -1,26 +1,29 @@
+<div class="form-container">
 <p id=”notice”><%= notice %></p>
 
 <h1>Wolf Events</h1>
-<p>Purchase event tickets at the snap of your finger</p>
+<p>Purchase event tickets at the snap of your finger</p><br>
 <% if current_admin %>
-  Hello <%= current_admin.name %><br>
-  <%= link_to 'View your profile', admin_path(current_admin) %><br>
-  <%= link_to 'View all rooms', rooms_path %><br>
-  <%= link_to 'View all events', events_path %><br>
-  <%= link_to 'View all attendees', attendees_path %><br>
-  <%= link_to 'View all event tickets', event_tickets_path %><br>
-  <%= link_to 'View all reviews', reviews_path %><br>
-  <%= link_to "Logout", logout_path %>
+  <h1>Hello <%= current_admin.name %><br></h1>
+  <%= link_to 'View your profile', admin_path(current_admin), class: 'home-button-style' %><br><br>
+  <%= link_to 'View all rooms', rooms_path, class: 'home-button-style' %><br><br>
+  <%= link_to 'View all events', events_path, class: 'home-button-style' %><br><br>
+  <%= link_to 'View all attendees', attendees_path, class: 'home-button-style' %><br><br>
+  <%= link_to 'View all event tickets', event_tickets_path, class: 'home-button-style' %><br><br>
+  <%= link_to 'View all reviews', reviews_path, class: 'home-button-style' %><br><br>
+  <%= link_to "Logout", logout_path, class: 'home-button-style' %><br>
 <% elsif current_user %>
-    Hello <%= current_user.name %><br>
-    <%= link_to 'View your profile', attendee_path(current_user) %><br>
-    <%= link_to 'View all events', events_path %><br>
-    <%= link_to 'View upcoming event to book tickets', upcoming_events_events_path %><br>
-    <%= link_to 'View past events', past_events_events_path %><br>
-    <%= link_to 'View your booking history', event_tickets_path %><br>
-    <%= link_to 'View all reviews', reviews_path %><br>
-    <%= link_to "Logout", logout_path %>
-<% else %>>
-    <%= link_to "Signup", signup_path %> or
-    <%= link_to "Login", login_path %>
+    <h1>Hello <%= current_user.name %><br></h1>
+    <%= link_to 'View your profile', attendee_path(current_user), class: 'home-button-style' %><br><br>
+    <%= link_to 'View all events', events_path, class: 'home-button-style' %><br><br>
+    <%= link_to 'View upcoming event to book tickets', upcoming_events_events_path, class: 'home-button-style' %><br><br>
+    <%= link_to 'View past events', past_events_events_path, class: 'home-button-style' %><br><br>
+    <%= link_to 'View your booking history', event_tickets_path, class: 'home-button-style' %><br><br>
+    <%= link_to 'View all reviews', reviews_path, class: 'home-button-style' %><br><br>
+    <%= link_to "Logout", logout_path, class: 'home-button-style' %><br>
+<% else %>
+    <%= link_to "Signup", signup_path, class: 'home-button-style' %>
+    <h3 style="text-align: center">or</h3>
+    <%= link_to "Login", login_path, class: 'home-button-style' %>
 <% end %>
+</div>

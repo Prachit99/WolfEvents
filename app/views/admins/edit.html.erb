@@ -1,17 +1,45 @@
+<div class="form-container">
 <h1>Editing admin</h1>
-
-<%= form_with model: @admin, url: admin_path(@admin), method: :patch, local: true do |f| %>
-  Email: <%= @admin.email %><br>
-  Password: <%= @admin.password %><br>
-  Name: <br><%= f.text_field :name %><br>
-  Phone: <br><%= f.text_field :phone %><br>
-  Address: <br><%= f.text_field :address %><br>
-  Credit Card: <br><%= f.text_field :credit_card %><br>
-  <%= f.submit %><br>
+<%= form_with model: @admin, url: admin_path(@admin), method: :patch, local: true do |form| %>
+    <div class="form-field-block">
+      <%= form.label :email, style: "display: block" %>
+      <%= form.text_field :email, value: @admin.email, readonly: true %>
+    </div>
+    <div class="form-field-block">
+      <%= form.label :password, style: "display: block" %>
+      <%= form.text_field :password, value: @admin.password, readonly: true %>
+    </div>
+    <div class="form-field-block">
+      <%= form.label :name, style: "display: block" %>
+      <%= form.text_field :name %>
+    </div>
+    <div class="form-field-block">
+      <%= form.label :phone, style: "display: block" %>
+      <%= form.text_field :phone %>
+    </div>
+    <div class="form-field-block">
+      <%= form.label :address, style: "display: block" %>
+      <%= form.text_field :address %>
+    </div>
+    <div class="form-field-block">
+      <%= form.label :credit_card, style: "display: block" %>
+      <%= form.text_field :credit_card %>
+    </div>
+    <div class="form-field-block">
+      <%= form.submit class: 'styled-submit-button'%>
+    </div>
+<!--  Email: <%#= @admin.email %><br>-->
+<!--  Password: <%#= @admin.password %><br>-->
+<!--  Name: <br><%#= f.text_field :name %><br>-->
+<!--  Phone: <br><%#= f.text_field :phone %><br>-->
+<!--  Address: <br><%#= f.text_field :address %><br>-->
+<!--  Credit Card: <br><%#= f.text_field :credit_card %><br>-->
+<!--  <%#= f.submit %><br>-->
 
 <% end %>
 
 <div>
-  <%= link_to "Show this admin", @admin %> |
-  <%= link_to "Back to admins", admins_path %>
+  <%= link_to "Show this admin", @admin, class: 'button-style' %> |
+  <%= link_to "Back to admins", admins_path, class: 'button-style' %>
+</div>
 </div>

@@ -4,7 +4,7 @@
 
 <div id="attendees">
 
-    <table>
+    <table class="table-style">
       <tr>
         <th>ID</th>
         <th>Name</th>
@@ -14,12 +14,12 @@
           <tr>
             <td><%= attendee.id %></td>
             <td><%= attendee.name %></td>
-            <td><%= link_to "Show this attendee", attendee %></td>
+            <td><%= link_to "Show this attendee", attendee, class: 'button-style' %></td>
           </tr>
       <% end %>
     </table>
 </div>
 <% if current_admin %>
-    <%= link_to "New attendee", new_attendee_path %>
+    <%= link_to "New attendee", new_attendee_path, class: 'button-style' %>
 <% end %> <br>
-<%= link_to "Home Page", root_path %>
+<%= link_to "Home Page", root_path, class: 'button-style' %>

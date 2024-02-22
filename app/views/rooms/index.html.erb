@@ -2,7 +2,7 @@
 
 <h1>Rooms</h1>
 <div id="rooms">
-    <table>
+    <table class="table-style">
       <tr>
         <th>Room ID</th>
         <th>Room Location</th>
@@ -19,5 +19,5 @@
       <% end %>
     </table>
 </div>
-<%= link_to "New room", new_room_path %><br>
-<%= link_to "Back to Home Page", root_path %><br>
+<%= link_to "New room", new_room_path, class: 'button-style' %><br>
+<%= link_to "Back to Home Page", root_path, class: 'button-style' %><br>

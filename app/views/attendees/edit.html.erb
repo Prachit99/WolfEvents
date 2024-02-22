@@ -5,8 +5,8 @@
 <br>
 
 <div>
-  <%= link_to "Back", @attendee %><br>
+  <%= link_to "Back", @attendee, class: 'button-style' %><br>
   <% if current_admin %>
-    <%= link_to "Back to attendees", attendees_path %>
+    <%= link_to "Back to attendees", attendees_path, class: 'button-style' %>
   <% end %>
 </div>

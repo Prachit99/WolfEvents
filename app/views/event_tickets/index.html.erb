@@ -14,7 +14,7 @@
     <%= submit_tag "Filter" %>
   <% end %>
 <% end %>
-<table>
+<table class="table-style">
   <thead>
   <tr>
     <th>Event Ticket ID</th>
@@ -23,6 +23,7 @@
     <th>Room ID</th>
     <th>Confirmation Number</th>
     <th>No. of tickets purchased</th>
+    <th>Bought by (User ID)</th>
     <th>Ticket Link</th>
     <!-- Other event ticket attributes -->
   </tr>
@@ -36,11 +37,14 @@
       <td><%= event_ticket.room_id %></td>
       <td><%= event_ticket.confirmation_num %></td>
       <td><%= event_ticket.num_of_seats %></td>
-      <td><%= link_to "Ticket", event_ticket_path(event_ticket) %></td>
+      <%# attendee = Attendee.find(event_ticket.bought_by) %>
+<!--      <td><%#= attendee.name %></td>-->
+      <td><%= event_ticket.bought_by %></td>
+      <td><%= link_to "View Ticket", event_ticket_path(event_ticket), class: 'button-style' %></td>
       <!-- Display other event ticket attributes -->
     </tr>
   <% end %>
   </tbody>
 </table>
 
-<%= link_to "Back to Home Page", root_path %>
+<%= link_to "Back to Home Page", root_path, class: 'button-style' %>

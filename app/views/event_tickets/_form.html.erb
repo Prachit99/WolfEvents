@@ -1,5 +1,5 @@
 <h1>New Event Ticket</h1>
-
+<div class="form-container">
 <%= form_with(model: @event_ticket, url: event_tickets_path) do |form| %>
   <% if @event_ticket.errors.any? %>
       <div id="error_explanation">
@@ -13,44 +13,48 @@
       </div>
   <% end %>
 
-  <div class="field">
-    <%= form.hidden_field :attendee_id, value: (current_user ? current_user.id : current_admin.id) %>
+  <div class="form-field-block">
+    <%= form.hidden_field :bought_by, value: (current_user ? current_user.id : current_admin.id) %>
   </div>
-  <div class="field">
+  <div class="form-field-block">
+    <%= form.label :attendee_id, "Ticket for:" %>
+    <%= form.collection_select :attendee_id, Attendee.all, :id, :name, include_blank: "Select the Attendee" %>
+  </div>
+  <div class="form-field-block">
     <%= form.hidden_field :event_id, value: @event.id %>
   </div>
-  <div class="field">
+  <div class="form-field-block">
     <%= form.hidden_field :room_id, value: @event.room_id %>
   </div>
-  <div class="field">
+  <div class="form-field-block">
     <p><strong>Event Name: </strong>
       <%= @event.event_name %></p>
   </div>
-  <div class="field">
+  <div class="form-field-block">
     <p><strong>Event Room: </strong>
       <%= @event.room.room_loc %></p>
   </div>
-  <div class="field">
+  <div class="form-field-block">
     <p><strong>Event Ticket Price: </strong>
       <%= @event.ticket_price %></p>
   </div>
-  <div class="field">
+  <div class="form-field-block">
     <p><strong>No. of Seats: </strong>
     <%= @event.no_of_seats %></p>
   </div>
-  <div class="field">
+  <div class="form-field-block">
     <%= form.label :num_of_seats %>
     <%= form.number_field :num_of_seats, :id => 'num_of_seats', min: 1, max: @event.no_of_seats, onchange: "calculateTotalPrice();" %>
   </div>
-  <div class="field">
+  <div class="form-field-block">
     <%= form.label :total_cost %>
     <%= form.text_field :total_cost, :id => 'total_cost', :readonly => true %>
   </div>
   <div>
-    <%= form.submit %>
+    <%= form.submit class: 'styled-submit-button'%>
   </div>
 <% end %>
-
+</div>
 
 <script type="text/javascript">
       function calculateTotalPrice() {

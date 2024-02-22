@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_22_060240) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_22_210137) do
   create_table "admins", force: :cascade do |t|
     t.string "email"
     t.string "password"
@@ -41,6 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_060240) do
     t.integer "room_id", null: false
     t.integer "event_id", null: false
     t.integer "num_of_seats"
+    t.integer "bought_by"
     t.index ["attendee_id"], name: "index_event_tickets_on_attendee_id"
     t.index ["event_id"], name: "index_event_tickets_on_event_id"
     t.index ["room_id"], name: "index_event_tickets_on_room_id"

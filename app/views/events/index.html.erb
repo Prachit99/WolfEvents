@@ -10,13 +10,13 @@
     <label for="filter_value">Filter Value:</label>
     <%= text_field_tag 'filter_value', nil, class: 'form-control' %>
 
-    <%= submit_tag 'Apply Filter', class: 'btn btn-primary' %>
+    <%= submit_tag 'Apply Filter', class: 'button-style' %>
 
-    <%= link_to 'Display All Events', events_path, class: 'btn btn-secondary', style: 'margin-left: 10px;' %>
+    <%= link_to 'Display All Events', events_path, class: 'button-style' %>
     <% end %>
 
 
-  <table>
+  <table class="table-style">
     <tr>
       <th>Event ID</th>
       <th>Event Name</th>
@@ -35,9 +35,9 @@
         <td><%= event.event_date %></td>
         <td>$ <%= event.ticket_price %></td>
         <td><%= event.no_of_seats %></td>
-        <td><%= link_to "Show this event", event %></td>
+        <td><%= link_to "Show this event", event, class: 'button-style' %></td>
         <% if event.event_start_time > DateTime.now() %>
-          <td><%= link_to "Sign up for this event", new_event_ticket_path(event_id: event.id)%></td>
+          <td><%= link_to "Sign up for this event", new_event_ticket_path(event_id: event.id), class: 'button-style'%></td>
         <% end %>
       </tr>
     <% end %>
@@ -45,7 +45,7 @@
 </div>
 
 <% if current_admin %>
-  <%= link_to "New event", new_event_path %>
+  <%= link_to "New event", new_event_path, class: 'button-style' %>
 <% end %>
 
-<%= link_to "Home Page", root_path %>
+<%= link_to "Home Page", root_path, class: 'button-style' %>

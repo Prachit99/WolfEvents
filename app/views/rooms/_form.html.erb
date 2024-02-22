@@ -1,3 +1,4 @@
+<div class="form-container">
 <%= form_with(model: room) do |form| %>
   <% if room.errors.any? %>
     <div style="color: red">
@@ -11,17 +12,18 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="form-field-block">
     <%= form.label :room_loc, style: "display: block" %>
     <%= form.text_field :room_loc %>
   </div>
 
-  <div>
+  <div class="form-field-block">
     <%= form.label :room_cap, style: "display: block" %>
     <%= form.number_field :room_cap %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-field-block">
+    <%= form.submit class: 'styled-submit-button'%>
   </div>
 <% end %>
+</div>
