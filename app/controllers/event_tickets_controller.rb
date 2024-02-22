@@ -1,5 +1,5 @@
 class EventTicketsController < ApplicationController
-  # before_action :set_event_ticket, only: %i[ show edit update destroy ]
+  #before_action :set_event_ticket, only: %i[ show edit update destroy ]
 
   # GET /event_tickets or /event_tickets.json
   def index
@@ -72,12 +72,24 @@ class EventTicketsController < ApplicationController
 
   # DELETE /event_tickets/1 or /event_tickets/1.json
   def destroy
-    @event_ticket.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to event_tickets_url, notice: "Event ticket was successfully destroyed." }
-      format.json { head :no_content }
+    @event_ticket = EventTicket.find(params[:id])
+    if @event_ticket
+      @event = Event.find(@event_ticket.event_id)
+      @event.no_of_seats += @event_ticket.num_of_seats
+      @event.save
+      @event_ticket.destroy!
+      respond_to do |format|
+        format.html { redirect_to event_tickets_url, notice: "Event ticket was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to event_tickets_url, alert: "Event ticket not found." }
+        format.json { render json: { error: "Event ticket not found." }, status: :not_found }
+      end
     end
+
+
   end
 
   # def signup_for_event
