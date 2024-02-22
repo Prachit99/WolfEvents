@@ -32,11 +32,14 @@ class EventTicketsController < ApplicationController
 
   # GET /event_tickets/1/edit
   def edit
+    @event_ticket = EventTicket.find(params[:id])
+    @event = Event.find(@event_ticket.event_id)
     @current_user = current_user
     attendee_id = @event_ticket.attendee_id
     if (!current_user or attendee_id != @current_user.id) and !current_admin
       redirect_to root_path, notice: "You are not authorized to view others' tickets."
     end
+
   end
 
   # POST /event_tickets or /event_tickets.json
@@ -59,8 +62,15 @@ class EventTicketsController < ApplicationController
 
   # PATCH/PUT /event_tickets/1 or /event_tickets/1.json
   def update
+    @event_ticket = EventTicket.find(params[:id])
+    puts "Event Ticket: #{@event_ticket}"
+    @event = Event.find(@event_ticket.event_id)
+    old_num_of_seats = @event_ticket.num_of_seats
     respond_to do |format|
       if @event_ticket.update(event_ticket_params)
+        new_num_of_seats = @event_ticket.num_of_seats
+        @event.no_of_seats += old_num_of_seats - new_num_of_seats
+        @event.save
         format.html { redirect_to event_ticket_url(@event_ticket), notice: "Event ticket was successfully updated." }
         format.json { render :show, status: :ok, location: @event_ticket }
       else
@@ -92,43 +102,7 @@ class EventTicketsController < ApplicationController
 
   end
 
-  # def signup_for_event
-  #   @attendee = current_user
-  #   @event = Event.find(params[:event_id])
-  #
-  #   # You can check if the user already has a ticket for this event
-  #   if @attendee.has_ticket_for_event?(@event)
-  #     flash[:notice] = "You already have a ticket for this event."
-  #     redirect_to @event
-  #     return
-  #   end
-  #
-  #   # Generate a confirmation number
-  #   confirmation_number = generate_confirmation_number(@event.id, @event.room.id, @attendee.id)
-  #
-  #   # Create an EventTicket
-  #   @event_ticket = EventTicket.new(
-  #     attendee: @attendee,
-  #     event: @event,
-  #     room: @event.room,
-  #     confirmation_num: confirmation_number
-  #   )
-  #
-  #   if @event_ticket.save
-  #     flash[:success] = "Successfully signed up for the event!"
-  #     redirect_to event_ticket_path(@event_ticket)
-  #   else
-  #     flash[:error] = "Failed to sign up for the event. Please try again."
-  #     redirect_to @event
-  #   end
-  # end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    # def set_event_ticket
-    #   @event_ticket = EventTicket.find(params[:id])
-    # end
-
     # Only allow a list of trusted parameters through.
     def event_ticket_params
       params.require(:event_ticket).permit(:event_id, :attendee_id, :room_id, :confirmation_num, :num_of_seats)
