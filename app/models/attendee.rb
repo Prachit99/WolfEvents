@@ -1,6 +1,7 @@
 class Attendee < ApplicationRecord
-  has_many :event_tickets
+  has_many :event_tickets, dependent: :destroy
   has_many :attended_events, through: :event_tickets, source: :event
+  has_many :reviews, dependent: :destroy
   def self.authenticate(email, password)
     attendee = Attendee.find_by(email: email)
     return attendee if attendee && attendee.password == password

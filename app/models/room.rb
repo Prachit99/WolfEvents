@@ -1,5 +1,5 @@
 class Room < ApplicationRecord
-  has_one :events
+  has_one :event, dependent: :destroy
   has_many :event_tickets
 
   validates :room_cap ,presence:true

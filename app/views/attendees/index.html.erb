@@ -12,7 +12,7 @@
       </tr>
       <% @attendees.each do |attendee| %>
           <tr>
-            <td><%= attendee.__id__ %></td>
+            <td><%= attendee.id %></td>
             <td><%= attendee.name %></td>
             <td><%= link_to "Show this attendee", attendee %></td>
           </tr>

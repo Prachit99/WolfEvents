@@ -1,8 +1,8 @@
 class Event < ApplicationRecord
   has_many :attendees
-  has_many :event_tickets
-  belongs_to :room
-  has_many :reviews
+  has_many :event_tickets, dependent: :destroy
+  belongs_to :room, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   validates :event_name, presence: true
   validates :event_cat, presence: true

@@ -1,7 +1,7 @@
 class EventTicket < ApplicationRecord
-  belongs_to :attendee
+  belongs_to :attendee, dependent: :destroy
   belongs_to :room
-  belongs_to :event
+  belongs_to :event, dependent: :destroy
 
   validates :confirmation_num ,presence:true
 

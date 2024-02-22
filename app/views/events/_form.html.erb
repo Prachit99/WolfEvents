@@ -18,7 +18,7 @@
 
   <div>
     <%= form.label :event_cat, style: "display: block" %>
-    <%= form.text_field :event_cat %>
+    <%= form.select :event_cat, options_for_select(['Concerts', 'Sports', 'Arts & Theatre', 'Miscellaneous/Family – Private'], event.event_cat), { include_blank: 'Select a Category' } %>
   </div>
 
   <div>

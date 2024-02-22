@@ -1,55 +1,3 @@
-<%#= form_with(model: event_ticket) do |form| %>
-  <%# if event_ticket.errors.any? %>
-<!--    <div style="color: red">-->
-<!--      <h2><%#= pluralize(event_ticket.errors.count, "error") %> prohibited this event_ticket from being saved:</h2>-->
-
-<!--      <ul>-->
-        <%# event_ticket.errors.each do |error| %>
-<!--          <li><%#= error.full_message %></li>-->
-        <%# end %>
-<!--      </ul>-->
-<!--    </div>-->
-  <%# end %>
-
-<!--  <div>-->
-    <%# if @event.present? %>
-<!--      <p><strong>Event Name:</strong> <%#= @event.event_name %></p>-->
-<!--      <p><strong>Event Room:</strong> <%#= @event.room.room_loc %></p>-->
-<!--      <p><strong>Event Start Time:</strong> <%#= @event.event_start_time %></p>-->
-<!--      <p><strong>Event End Time:</strong> <%#= @event.event_end_time %></p>-->
-<!--      <p><strong>Event Ticket Price per person: </strong><%#= @event.ticket_price %></p>-->
-<!--      <div>-->
-        <%#= form.label :seats_to_book, style: "display: block" %>
-        <%#= form.number_field :seats_to_book, min: 1 %>
-<!--      </div>-->
-    <%# else %>
-<!--      <p>No event details available</p>-->
-    <%# end %>
-
-    <!-- "Book Tickets" link with toggle functionality -->
-<!--    <div>-->
-      <%#= link_to "Book Tickets", "javascript:void(0);", id: "book_tickets_link" %>
-<!--    </div>-->
-
-    <!-- "Amount to Pay" section -->
-<!--    <div id="amount_to_pay_section" style="display: none;">-->
-<!--      <p><strong>Amount to Pay: </strong><span id="amount_to_pay">0</span></p>-->
-<!--    </div>-->
-
-
-    <%#= form.label :confirmation_num, style: "display: block" %>
-    <%#= form.text_field :confirmation_num %>
-
-<!--    <div>-->
-      <%#= form.submit %>
-<!--    </div>-->
-<!--  </div>-->
-<%# end %>
-
-
-
-<!-- app/views/event_tickets/new.html.erb -->
-
 <h1>New Event Ticket</h1>
 
 <%= form_with(model: @event_ticket, url: event_tickets_path) do |form| %>
@@ -65,9 +13,8 @@
       </div>
   <% end %>
 
-
   <div class="field">
-    <%= form.hidden_field :attendee_id, value: current_user.id %>
+    <%= form.hidden_field :attendee_id, value: (current_user ? current_user.id : current_admin.id) %>
   </div>
   <div class="field">
     <%= form.hidden_field :event_id, value: @event.id %>
@@ -75,7 +22,6 @@
   <div class="field">
     <%= form.hidden_field :room_id, value: @event.room_id %>
   </div>
-
   <div class="field">
     <p><strong>Event Name: </strong>
       <%= @event.event_name %></p>
@@ -96,12 +42,10 @@
     <%= form.label :num_of_seats %>
     <%= form.number_field :num_of_seats, :id => 'num_of_seats', min: 1, max: @event.no_of_seats, onchange: "calculateTotalPrice();" %>
   </div>
-
   <div class="field">
     <%= form.label :total_cost %>
     <%= form.text_field :total_cost, :id => 'total_cost', :readonly => true %>
   </div>
-
   <div>
     <%= form.submit %>
   </div>
