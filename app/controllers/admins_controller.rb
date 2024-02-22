@@ -3,20 +3,36 @@ class AdminsController < ApplicationController
 
   # GET /admins or /admins.json
   def index
+    admin = current_admin
+    unless admin
+      redirect_to root_path, notice: "You are not authorized to see admin details."
+    end
     @admins = Admin.all
   end
 
   # GET /admins/1 or /admins/1.json
   def show
+    admin = current_admin
+    unless admin
+      redirect_to root_path, notice: "You are not authorized to see admin details."
+    end
   end
 
   # GET /admins/new
   def new
+    admin = current_admin
+    unless admin
+      redirect_to root_path, notice: "You are not authorized to create new admin accounts."
+    end
     @admin = Admin.new
   end
 
   # GET /admins/1/edit
   def edit
+    admin = current_admin
+    unless admin
+      redirect_to root_path, notice: "You are not authorized to edit admin details."
+    end
   end
 
   # POST /admins or /admins.json

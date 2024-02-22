@@ -28,6 +28,10 @@ class AttendeesController < ApplicationController
 
   # GET /attendees/1/edit
   def edit
+    @current_user = current_user
+    if (!@current_user or @current_user.id != @attendee.id) and !current_admin
+      redirect_to root_path, notice: "You are not authorized to edit others' profiles."
+    end
   end
 
   # POST /attendees or /attendees.json

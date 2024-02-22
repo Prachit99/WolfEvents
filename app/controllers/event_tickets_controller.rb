@@ -3,14 +3,22 @@ class EventTicketsController < ApplicationController
 
   # GET /event_tickets or /event_tickets.json
   def index
-    @event_tickets = EventTicket.all
-    @event_tickets = EventTicket.filter(params[:event_id], params[:attendee_id])
-
+    # @event_tickets = EventTicket.all
+    if current_user
+      @event_tickets = EventTicket.where(attendee_id: current_user.id)
+    elsif current_admin
+      @event_tickets = EventTicket.filter(params[:event_id], params[:attendee_id])
+    end
   end
 
   # GET /event_tickets/1 or /event_tickets/1.json
   def show
     @event_ticket = EventTicket.find(params[:id])
+    @current_user = current_user
+    attendee_id = @event_ticket.attendee_id
+    if (!current_user or attendee_id != @current_user.id) and !current_admin
+      redirect_to root_path, notice: "You are not authorized to view others' tickets."
+    end
   end
 
   # GET /event_tickets/new
@@ -24,6 +32,11 @@ class EventTicketsController < ApplicationController
 
   # GET /event_tickets/1/edit
   def edit
+    @current_user = current_user
+    attendee_id = @event_ticket.attendee_id
+    if (!current_user or attendee_id != @current_user.id) and !current_admin
+      redirect_to root_path, notice: "You are not authorized to view others' tickets."
+    end
   end
 
   # POST /event_tickets or /event_tickets.json
@@ -32,6 +45,7 @@ class EventTicketsController < ApplicationController
 
     @event = Event.find(params[:event_ticket][:event_id])
     @event_ticket.confirmation_num = rand(0..999999)
+    # @event.no_of_seats
     respond_to do |format|
       if @event_ticket.save
         format.html { redirect_to event_ticket_url(@event_ticket), notice: "Event ticket was successfully created." }

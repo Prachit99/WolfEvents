@@ -20,10 +20,18 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @rooms = Room.all
+    admin = current_admin
+    unless admin
+      redirect_to root_path, notice: "You are not authorized to view rooms."
+    end
   end
 
   # GET /events/1/edit
   def edit
+    admin = current_admin
+    unless admin
+      redirect_to root_path, notice: "You are not authorized to view rooms."
+    end
   end
 
   # POST /events or /events.json

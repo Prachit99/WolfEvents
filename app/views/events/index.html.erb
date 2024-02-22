@@ -25,6 +25,7 @@
       <th>Ticket Price</th>
       <th>No. of Seats</th>
       <th>Event Link</th>
+      <th>Book a ticket</th>
     </tr>
     <% @events.each do |event| %>
       <tr>
@@ -35,6 +36,9 @@
         <td>$ <%= event.ticket_price %></td>
         <td><%= event.no_of_seats %></td>
         <td><%= link_to "Show this event", event %></td>
+        <% if event.event_start_time > DateTime.now() %>
+          <td><%= link_to "Sign up for this event", new_event_ticket_path(event_id: event.id)%></td>
+        <% end %>
       </tr>
     <% end %>
   </table>

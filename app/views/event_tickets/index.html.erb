@@ -1,22 +1,23 @@
 <h1>Event Tickets</h1>
+<% if current_admin %>
+  <%= form_tag(event_tickets_path, method: :get) do %>
+    <div class="field">
+      <%= label_tag :event_id, "Event ID" %>
+      <%= text_field_tag :event_id, params[:event_id] %>
+    </div>
 
-<%= form_tag(event_tickets_path, method: :get) do %>
-  <div class="field">
-    <%= label_tag :event_id, "Event ID" %>
-    <%= text_field_tag :event_id, params[:event_id] %>
-  </div>
+    <div class="field">
+      <%= label_tag :attendee_id, "Attendee ID" %>
+      <%= text_field_tag :attendee_id, params[:attendee_id] %>
+    </div>
 
-  <div class="field">
-    <%= label_tag :attendee_id, "Attendee ID" %>
-    <%= text_field_tag :attendee_id, params[:attendee_id] %>
-  </div>
-
-  <%= submit_tag "Filter" %>
+    <%= submit_tag "Filter" %>
+  <% end %>
 <% end %>
-
 <table>
   <thead>
   <tr>
+    <th>Event Ticket ID</th>
     <th>Event ID</th>
     <th>Attendee ID</th>
     <th>Room ID</th>
@@ -27,6 +28,7 @@
   <tbody>
   <% @event_tickets.each do |event_ticket| %>
     <tr>
+      <td><%= event_ticket.id %></td>
       <td><%= event_ticket.event.event_name %></td>
       <td><%= event_ticket.attendee.name %></td>
       <td><%= event_ticket.room_id %></td>
