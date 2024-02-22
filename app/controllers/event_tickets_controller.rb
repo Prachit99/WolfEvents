@@ -42,12 +42,11 @@ class EventTicketsController < ApplicationController
   # POST /event_tickets or /event_tickets.json
   def create
     @event_ticket = EventTicket.new(event_ticket_params)
-
     @event = Event.find(params[:event_ticket][:event_id])
     @event_ticket.confirmation_num = rand(0..999999)
-    # @event.no_of_seats
+    @event.no_of_seats -= @event_ticket.num_of_seats
     respond_to do |format|
-      if @event_ticket.save
+      if @event_ticket.save and @event.save
         format.html { redirect_to event_ticket_url(@event_ticket), notice: "Event ticket was successfully created." }
         format.json { render :show, status: :created, location: @event_ticket }
       else
@@ -120,7 +119,7 @@ class EventTicketsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_ticket_params
-      params.require(:event_ticket).permit(:event_id, :attendee_id, :room_id, :confirmation_num)
+      params.require(:event_ticket).permit(:event_id, :attendee_id, :room_id, :confirmation_num, :num_of_seats)
     end
 
   def generate_confirmation_number(event_id,room_id,attendee_id)

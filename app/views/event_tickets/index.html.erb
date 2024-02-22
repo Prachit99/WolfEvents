@@ -22,6 +22,7 @@
     <th>Attendee ID</th>
     <th>Room ID</th>
     <th>Confirmation Number</th>
+    <th>No. of tickets purchased</th>
     <!-- Other event ticket attributes -->
   </tr>
   </thead>
@@ -33,6 +34,7 @@
       <td><%= event_ticket.attendee.name %></td>
       <td><%= event_ticket.room_id %></td>
       <td><%= event_ticket.confirmation_num %></td>
+      <td><%= event_ticket.num_of_seats %></td>
       <!-- Display other event ticket attributes -->
     </tr>
   <% end %>
