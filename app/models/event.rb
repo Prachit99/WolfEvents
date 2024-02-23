@@ -1,8 +1,13 @@
 class Event < ApplicationRecord
-  has_many :attendees
-  has_many :event_tickets
+
+  # has_many :attendees
+  has_many :event_tickets, dependent: :destroy
+
+  # has_many :event_tickets
+  has_many :attendees, through: :event_tickets
+
   belongs_to :room
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   validates :event_name, presence: true
   validates :event_cat, presence: true
@@ -27,6 +32,11 @@ class Event < ApplicationRecord
     else
       all
     end
+  end
+
+
+  def attendees_for_event
+    attendees.where(event_tickets: { event_id: id })
   end
   # scope :visible_to_user, ->(user) {
   #   if user&.admin?

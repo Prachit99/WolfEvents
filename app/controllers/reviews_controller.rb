@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: %i[ show edit update destroy ]
+  before_action :set_review, only: %i[show edit update destroy]
+  before_action :authorize_review_owner, only: %i[edit update destroy]
 
   # GET /reviews or /reviews.json
   def index
@@ -12,6 +13,7 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1 or /reviews/1.json
   def show
+
   end
 
   # GET /reviews/new
@@ -44,7 +46,7 @@ class ReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @review.update(review_params)
-        format.html { redirect_to review_url(@review), notice: "Review was successfully updated." }
+        format.html { redirect_to review_url(@review), notice: 'Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @review }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -73,4 +75,9 @@ class ReviewsController < ApplicationController
     def review_params
       params.require(:review).permit(:rating, :feedback, :attendee_id, :event_id)
     end
+  def authorize_review_owner
+    unless @review.attendee_id == current_user.id
+      redirect_to root_path, alert: 'Access denied! You can only edit your own reviews.'
+    end
+  end
 end

@@ -1,9 +1,12 @@
-<h1>New attendee</h1>
-
-<%= render "form", attendee: @attendee %>
-
-<br>
-
-<div>
-  <%= link_to "Back to attendees", attendees_path %>
+<div class="form-container">
+  <h1>New attendee</h1>
+  <%= render "form", attendee: @attendee %><br>
+  <div>
+    <% if current_admin %>
+      <%= link_to "Back to attendees", attendees_path, class: 'button-style' %>
+    <% end %>
+    <%= link_to "Home Page", root_path, class: 'button-style' %>
+  </div>
 </div>
+
+

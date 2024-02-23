@@ -3,22 +3,43 @@ class AdminsController < ApplicationController
 
   # GET /admins or /admins.json
   def index
+    admin = current_admin
+    unless admin
+      redirect_to root_path, notice: "You are not authorized to see admin details."
+    end
     @admins = Admin.all
   end
 
   # GET /admins/1 or /admins/1.json
   def show
+    admin = current_admin
+    unless admin
+      redirect_to root_path, notice: "You are not authorized to see admin details."
+    end
   end
 
   # GET /admins/new
   def new
-    @admin = Admin.new
+    redirect_to root_path, notice: "You are not authorized to create new admin accounts."
   end
 
   # GET /admins/1/edit
   def edit
+    admin = current_admin
+    unless admin
+      redirect_to root_path, notice: "You are not authorized to edit admin details."
+    end
   end
+  def search
+    @event_name = params[:event_name]
+    @event = Event.find_by(event_name: @event_name)
 
+    if @event
+      @attendees = @event.attendees.distinct
+    else
+      @attendees = []
+    end
+  end
   # POST /admins or /admins.json
   def create
     @admin = Admin.new(admin_params)

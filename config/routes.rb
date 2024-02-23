@@ -7,6 +7,11 @@ Rails.application.routes.draw do
     get 'upcoming_events', on: :collection
     get 'past_events', on: :collection
   end
+  resources :admins do
+    collection do
+      get 'search'
+    end
+  end
   resources :attendees
   resources :rooms
   resources :admins

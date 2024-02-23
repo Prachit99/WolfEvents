@@ -3,6 +3,10 @@ class RoomsController < ApplicationController
 
   # GET /rooms or /rooms.json
   def index
+    admin = current_admin
+    unless admin
+      redirect_to root_path, notice: "You are not authorized to see rooms."
+    end
     @rooms = Room.all
   end
 
@@ -17,11 +21,19 @@ class RoomsController < ApplicationController
 
   # GET /rooms/new
   def new
+    admin = current_admin
+    unless admin
+      redirect_to root_path, notice: "You are not authorized to create new rooms."
+    end
     @room = Room.new
   end
 
   # GET /rooms/1/edit
   def edit
+    admin = current_admin
+    unless admin
+      redirect_to root_path, notice: "You are not authorized to edit room details."
+    end
   end
 
   # POST /rooms or /rooms.json

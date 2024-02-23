@@ -1,3 +1,4 @@
+<div class="form-container">
 <%= form_with(model: event) do |form| %>
   <% if event.errors.any? %>
     <div style="color: red">
@@ -11,59 +12,60 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="form-field-block">
     <%= form.label :event_name, style: "display: block" %>
     <%= form.text_field :event_name %>
   </div>
 
-  <div>
+  <div class="form-field-block">
     <%= form.label :event_cat, style: "display: block" %>
-    <%= form.text_field :event_cat %>
+    <%= form.select :event_cat, options_for_select(['Concerts', 'Sports', 'Arts & Theatre', 'Miscellaneous/Family – Private'], event.event_cat), { include_blank: 'Select a Category' } %>
   </div>
 
-  <div>
+  <div class="form-field-block">
     <%= form.label :event_date, style: "display: block" %>
     <%= form.date_field :event_date %>
   </div>
 
-  <div>
+  <div class="form-field-block">
     <%= form.label :event_start_time, style: "display: block" %>
     <%= form.datetime_field :event_start_time %>
   </div>
 
-  <div>
+  <div class="form-field-block">
     <%= form.label :event_end_time, style: "display: block" %>
     <%= form.datetime_field :event_end_time %>
   </div>
 
-  <div>
+  <div class="form-field-block">
     <%= form.label :ticket_price, style: "display: block" %>
     <%= form.text_field :ticket_price %>
   </div>
 
-  <div>
+  <div class="form-field-block">
     <%= form.label :no_of_seats, style: "display: block" %>
     <%= form.number_field :no_of_seats %>
   </div>
 
-  <div>
+  <div class="form-field-block">
     <%#= form.label :room_id, "Select Room" %>
     <%= form.hidden_field :room_id, id: "selected_room_id" %>
     <button type="button" id="select-room-button" class="btn btn-primary">Select Room</button>
     <!-- Dropdown with rooms (initially hidden) -->
-    <div id="room-dropdown" style="display: none;">
-      <% if @available_rooms.present? %>
-        <%= form.collection_select(:room_id, @available_rooms, :id, :room_loc, { prompt: 'Select a Room' }) %>
+    <div id="room-dropdown"  class="form-field-block">
+      <% if @rooms.present? %>
+        <%= form.collection_select(:room_id, @rooms, :id, :room_loc, { prompt: 'Select a Room' }) %>
       <% else %>
         <p>No available rooms.</p>
       <% end %>
     </div>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-field-block">
+    <%= form.submit class: 'styled-submit-button'%>
   </div>
 <% end %>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

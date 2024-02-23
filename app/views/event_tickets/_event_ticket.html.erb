@@ -1,8 +1,24 @@
 <div id="<%= dom_id event_ticket %>">
 
-  <p>
+
+    <p><strong>Event Name: </strong>
+      <%= event_ticket.event.event_name %>
+    </p>
+
+    <p><strong>Event Room: </strong>
+      <%= event_ticket.room.room_loc %>
+    </p>
+
+    <p><strong>Event Date:</strong>
+      <%= event_ticket.event.event_date %></p>
+    <p>
+
     <strong>Confirmation num:</strong>
     <%= event_ticket.confirmation_num %>
-  </p>
+    </p>
+
+    <strong>Number of Tickets purchased:</strong>
+    <%= event_ticket.num_of_seats %>
+    </p>
 
 </div>

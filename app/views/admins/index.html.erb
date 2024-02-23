@@ -6,9 +6,9 @@
   <% @admins.each do |admin| %>
     <%= render admin %>
     <p>
-      <%= link_to "Show this admin", admin %>
+      <%= link_to "Show this admin", admin, class: 'button-style' %>
     </p>
-    <%= link_to "Back to Home Page", root_path %>
+    <%= link_to "Back to Home Page", root_path, class: 'button-style' %>
   <% end %>
 </div>
 

@@ -13,3 +13,141 @@
  *= require_tree .
  *= require_self
  */
+
+.table-style {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-style th, .table-style td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.table-style th {
+    background-color: #f2f2f2;
+}
+
+.button-style {
+    background-color: #5bc0de; /* Light blue background */
+    border: none; /* Remove border */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Display as inline block */
+    font-size: 16px; /* Font size */
+    margin: 4px 2px; /* Margin */
+    cursor: pointer; /* Add cursor pointer on hover */
+    border-radius: 8px; /* Add border radius */
+}
+
+.home-button-style {
+    /* Add your button styles here */
+    display: inline-block;
+    padding: 10px 20px;
+    width: 400px; /* Adjust the width as needed */
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Change background color on hover */
+.button-style:hover {
+    background-color: #46b8da; /* Lighter shade of blue on hover */
+}
+
+.form-container {
+    width: 400px; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the form horizontally */
+}
+
+.form-field-block {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-field-block label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-field-block input[type="text"],
+.form-field-block input[type="number"],
+.form-field-block input[type="password"],
+.form-field-block select {
+    width: 100%; /* Make all inputs the same length */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Extend styles for buttons */
+.form-field-block button[type="submit"],
+.form-field-block button[type="button"] {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Extend styles for select drop-downs */
+.form-field-block select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Extend styles for datetime fields */
+.form-field-block input[type="datetime-local"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Extend styles for date fields */
+.form-field-block input[type="date"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+}
+
+.styled-submit-button {
+    /* Add your button styles here */
+    width: 100%;
+    height: 40px; /* Increase button height */
+    padding: 8px 12px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold; /* Bold text */
+    font-size: 16px; /* Increase font size */
+}
+
+.styled-submit-button:hover {
+    background-color: #007bff; /* Change color on hover if needed */
+}
+
+
+
+

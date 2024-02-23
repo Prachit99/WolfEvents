@@ -2,7 +2,7 @@
 
 <h1>Rooms</h1>
 <div id="rooms">
-    <table>
+    <table class="table-style">
       <tr>
         <th>Room ID</th>
         <th>Room Location</th>
@@ -11,13 +11,13 @@
       </tr>
       <% @rooms.each do |room| %>
       <tr>
-        <td><%= room.__id__ %></td>
+        <td><%= room.id %></td>
         <td><%= room.room_loc %></td>
         <td><%= room.room_cap %></td>
-        <td><%= link_to "Show this room", room %></td>
+        <td><%= link_to "Show this room", room, class: "button-style" %></td>
       </tr>
       <% end %>
     </table>
 </div>
-<%= link_to "New room", new_room_path %><br>
-<%= link_to "Back to Home Page", root_path %><br>
+<%= link_to "New room", new_room_path, class: 'button-style' %> |
+<%= link_to "Back to Home Page", root_path, class: 'button-style' %><br>

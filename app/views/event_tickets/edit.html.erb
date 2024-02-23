@@ -1,10 +1,56 @@
 <h1>Editing event ticket</h1>
+<div class="form-container">
+<%= form_with(model: @event_ticket, url: event_ticket_path(@event_ticket), method: :patch) do |form| %>
+  <div class="form-field-block">
+    <%= form.hidden_field :attendee_id, value: (current_user ? current_user.id : current_admin.id) %>
+  </div>
+  <div class="form-field-block">
+    <%= form.hidden_field :event_id, value: @event.id %>
+  </div>
+  <div class="form-field-block">
+    <%= form.hidden_field :room_id, value: @event.room_id %>
+  </div>
+  <div class="form-field-block">
+    <p><strong>Event Name: </strong>
+      <%= @event.event_name %></p>
+  </div>
+  <div class="form-field-block">
+    <p><strong>Event Room: </strong>
+      <%= @event.room.room_loc %></p>
+  </div>
+  <div class="form-field-block">
+    <p><strong>Event Ticket Price: </strong>
+      <%= @event.ticket_price %></p>
+  </div>
+  <div class="form-field-block">
+    <p><strong>No. of Seats: </strong>
+      <%= @event.no_of_seats %></p>
+  </div>
+  <div class="form-field-block">
+    <%= form.label :num_of_seats %>
+    <%= form.number_field :num_of_seats, :id => 'num_of_seats', min: 1, max: @event.no_of_seats, onchange: "calculateTotalPrice();" %>
+  </div>
+  <div class="form-field-block">
+    <%= form.label :total_cost %>
+    <%= form.text_field :total_cost, :id => 'total_cost', :readonly => true %>
+  </div>
+  <div class="form-field-block">
+    <%= form.submit class: 'styled-submit-button'%>
+  </div>
+<% end %>
 
-<%= render "form", event_ticket: @event_ticket %>
 
 <br>
 
 <div>
-  <%= link_to "Show this event ticket", @event_ticket %> |
-  <%= link_to "Back to event tickets", event_tickets_path %>
+  <%= link_to "Show this event ticket", @event_ticket, class: 'button-style' %> |
+  <%= link_to "Back to event tickets", event_tickets_path, class: 'button-style' %>
 </div>
+</div>
+
+<script type="text/javascript">
+    function calculateTotalPrice() {
+        var price = "<%= @event.ticket_price %>";
+        document.getElementById('total_cost').value = document.getElementById('num_of_seats').value * price;
+    }
+</script>
