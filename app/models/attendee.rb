@@ -11,6 +11,7 @@ class Attendee < ApplicationRecord
     Event.joins(:event_tickets)
          .where(event_tickets: { attendee_id: id })
          .where("events.event_end_time < ?", Time.now)
+         .where.not(events: { event_cat: "Miscellaneous/Family – Private" })
   end
 
   validates :name, presence: true
