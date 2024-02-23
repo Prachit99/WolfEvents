@@ -9,9 +9,11 @@
   <%= link_to 'View all rooms', rooms_path, class: 'home-button-style' %><br><br>
   <%= link_to 'View all events', events_path, class: 'home-button-style' %><br><br>
   <%= link_to 'View all attendees', attendees_path, class: 'home-button-style' %><br><br>
+  <%= link_to 'Search Attendees for Event', search_admins_path, class: 'home-button-style' %><br><br>
   <%= link_to 'View all event tickets', event_tickets_path, class: 'home-button-style' %><br><br>
   <%= link_to 'View all reviews', reviews_path, class: 'home-button-style' %><br><br>
   <%= link_to "Logout", logout_path, class: 'home-button-style' %><br>
+
 <% elsif current_user %>
     <h1>Hello <%= current_user.name %><br></h1>
     <%= link_to 'View your profile', attendee_path(current_user), class: 'home-button-style' %><br><br>

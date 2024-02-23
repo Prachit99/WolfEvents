@@ -1,0 +1,26 @@
+<h1>Search Attendees by Event</h1>
+
+<%= form_tag search_admins_path, method: :get do %>
+  <label for="event_name">Event Name:</label>
+  <%= text_field_tag :event_name, params[:event_name], placeholder: 'Enter Event Name' %>
+  <%= submit_tag 'Search' %>
+<% end %>
+
+<h1>Attendees for Event: <%= @event_name %></h1>
+
+<table style="border: 1px solid black; border-collapse: collapse;">
+  <thead>
+  <tr>
+    <th style="border: 1px solid black; padding: 8px;">Attendee Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @attendees.each do |attendee| %>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;"><%= attendee.name %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Back", root_path %>

@@ -8,7 +8,9 @@ class Attendee < ApplicationRecord
   end
 
   def attended_events
-    Event.joins(:event_tickets).where(event_tickets: { attendee_id: id })
+    Event.joins(:event_tickets)
+         .where(event_tickets: { attendee_id: id })
+         .where("events.event_end_time < ?", Time.now)
   end
 
   validates :name, presence: true

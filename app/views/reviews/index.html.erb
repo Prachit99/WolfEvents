@@ -22,7 +22,6 @@
       <th>Rating</th>
       <th>Feedback</th>
       <th>Action</th>
-      <th>Action</th>
     </tr>
 
     <% @reviews.each do |review| %>
@@ -31,14 +30,7 @@
         <td><%= Attendee.find(review.attendee_id).name %></td>
         <td><%= review.rating %></td>
         <td><%= review.feedback %></td>
-        <td><%= link_to "Show this review", review %></td>
-        <% if review.attendee_id == current_user.id %>
-          <td><%= link_to "Edit", edit_review_path(review) %></td>
-          <td><%= button_to "Delete", review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% else %>
-          <td></td>
-          <td></td>
-        <% end %>
+        <td><%= link_to "View Review", review %></td>
       </tr>
     <% end %>
   </table>

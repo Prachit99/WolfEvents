@@ -1,6 +1,11 @@
 class Event < ApplicationRecord
-  has_many :attendees
+
+  # has_many :attendees
   has_many :event_tickets, dependent: :destroy
+
+  # has_many :event_tickets
+  has_many :attendees, through: :event_tickets
+
   belongs_to :room
   has_many :reviews, dependent: :destroy
 
@@ -29,4 +34,17 @@ class Event < ApplicationRecord
     end
   end
 
+
+  def attendees_for_event
+    attendees.where(event_tickets: { event_id: id })
+  end
+  # scope :visible_to_user, ->(user) {
+  #   if user&.admin?
+  #     all # Admin can see all events
+  #   elsif user&.attendee?
+  #     upcoming.not_sold_out # Attendees can see upcoming events that are not sold out
+  #   else
+  #     none # Default to no events for other roles (optional)
+  #   end
+  # }
 end

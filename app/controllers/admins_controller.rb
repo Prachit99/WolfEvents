@@ -34,7 +34,16 @@ class AdminsController < ApplicationController
       redirect_to root_path, notice: "You are not authorized to edit admin details."
     end
   end
+  def search
+    @event_name = params[:event_name]
+    @event = Event.find_by(event_name: @event_name)
 
+    if @event
+      @attendees = @event.attendees.distinct
+    else
+      @attendees = []
+    end
+  end
   # POST /admins or /admins.json
   def create
     @admin = Admin.new(admin_params)
