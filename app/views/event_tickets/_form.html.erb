@@ -47,8 +47,9 @@
     <%= form.number_field :num_of_seats, :id => 'num_of_seats', min: 1, max: @event.no_of_seats, onchange: "calculateTotalPrice();" %>
   </div>
   <div class="form-field-block">
-    <%= form.label :total_cost %>
-    <%= form.text_field :total_cost, :id => 'total_cost', :readonly => true %>
+    <%= form.label :total_cost %><br>
+    <%#= form.text_field :total_cost, :id => 'total_cost', :readonly => true %>
+    <span id="total_cost"></span>
   </div>
   <div>
     <%= form.submit class: 'styled-submit-button'%>
@@ -59,7 +60,7 @@
 <script type="text/javascript">
       function calculateTotalPrice() {
         var price = "<%= @event.ticket_price %>";
-        document.getElementById('total_cost').value = document.getElementById('num_of_seats').value * price;
+          document.getElementById('total_cost').textContent = (document.getElementById('num_of_seats').value * price).toFixed(2) + " USD";
     }
 </script>
 
