@@ -1,6 +1,5 @@
 <div class="form-container">
 <%= form_with(model: review) do |form| %>
-
   <div class="form-field-block">
     <%= form.label :event_id, 'Select Attended Event:' %>
     <%= select_tag 'event_id', options_from_collection_for_select(current_user.attended_events, 'id', 'event_name') %>

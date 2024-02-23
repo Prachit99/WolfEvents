@@ -1,22 +1,22 @@
-<p id="alert"><%= alert %></p>
 <div class="form-container">
-<h1>Login</h1>
-<%= form_tag sessions_path do |form| %>
-  <div class="form-field-block">
-    <%= label_tag :email %>
-    <%= text_field_tag :email %>
-  </div>
+  <p id="alert"><%= alert %></p>
+  <h1>Login</h1>
+  <%= form_tag sessions_path do |form| %>
+    <div class="form-field-block">
+      <%= label_tag :email %>
+      <%= text_field_tag :email %>
+    </div>
 
-  <div class="form-field-block">
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
-  </div>
+    <div class="form-field-block">
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
+    </div>
 
-  <div class="form-field-block">
-    <%= submit_tag "Login", class: 'styled-submit-button' %>
-  </div>
-  <div>
-    <%= link_to "Back to Home Page", root_path, class: 'button-style' %>
-  </div>
-<% end %>
+    <div class="form-field-block">
+      <%= submit_tag "Login", class: 'styled-submit-button' %>
+    </div>
+    <div>
+      <%= link_to "Back to Home Page", root_path, class: 'button-style' %>
+    </div>
+  <% end %>
 </div>
