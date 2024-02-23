@@ -1,15 +1,18 @@
+<div class="form-container">
 <p style="color: green"><%= notice %></p>
 
 <%= render @event %>
 
 <div>
-  <%= link_to "Back to events", events_path %>
+  <%= link_to "Back to events", events_path, class: "button-style" %>
 
   <% if current_admin %>
-    <%= link_to "Edit this event", edit_event_path(@event) %>
-    <%= button_to "Destroy this event", @event, method: :delete %>
+    <%= link_to "Edit this event", edit_event_path(@event), class: "button-style" %>
+    <%= button_to "Destroy this event", @event, method: :delete, class: "button-style" %>
   <% end %>
   <% if current_user && @event.event_start_time > DateTime.now() %>
-    <%= link_to "Sign up for this event", new_event_ticket_path(event_id: @event.id) %>
+    <%= link_to "Sign up for this event", new_event_ticket_path(event_id: @event.id), class: "button-style" %>
   <% end %>
 </div>
+</div>
+

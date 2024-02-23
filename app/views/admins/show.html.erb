@@ -1,9 +1,11 @@
-<p style="color: green"><%= notice %></p>
+<div class="form-container">
+  <p style="color: green"><%= notice %></p>
+  <h1>Your Profile</h1>
+  <%= render @admin %>
 
-<%= render @admin %>
-
-<div>
-  <%= link_to "Edit this admin", edit_admin_path(@admin), class: 'button-style' %> |
-  <%= link_to "Back to admins", admins_path, class: 'button-style' %> |
-  <%= link_to "Back to Home Page", root_path, class: 'button-style' %>
+  <div>
+    <%= link_to "Edit this admin", edit_admin_path(@admin), class: 'button-style' %> |
+    <%= link_to "Back to admins", admins_path, class: 'button-style' %> |
+    <%= link_to "Back to Home Page", root_path, class: 'button-style' %>
+  </div>
 </div>

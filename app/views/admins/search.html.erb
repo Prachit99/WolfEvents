@@ -1,9 +1,10 @@
+<div class="form-container">
 <h1>Search Attendees by Event</h1>
 
 <%= form_tag search_admins_path, method: :get do %>
   <label for="event_name">Event Name:</label>
   <%= text_field_tag :event_name, params[:event_name], placeholder: 'Enter Event Name' %>
-  <%= submit_tag 'Search' %>
+  <%= submit_tag 'Search', class: "button-style" %>
 <% end %>
 
 <h1>Attendees for Event: <%= @event_name %></h1>
@@ -23,4 +24,5 @@
   </tbody>
 </table>
 
-<%= link_to "Back", root_path %>
+<%= link_to "Back", root_path, class: "button-style" %>
+</div>

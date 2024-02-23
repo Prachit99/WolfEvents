@@ -8,7 +8,7 @@
         <strong>Event Date:</strong> <%= event.event_date %><br>
         <strong>Ticket Price</strong> <%= event.ticket_price %><br>
         <strong>No. of seats</strong> <%= event.no_of_seats %><br>
-        <%= link_to "Sign up for this event", new_event_ticket_path(event_id: event.id) %><br>
+        <%= link_to "Sign up for this event", new_event_ticket_path(event_id: event.id), class: "home-button-style" %><br>
       </li>
     <% end %>
   </ul>

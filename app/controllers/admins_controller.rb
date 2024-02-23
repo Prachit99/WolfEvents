@@ -20,11 +20,7 @@ class AdminsController < ApplicationController
 
   # GET /admins/new
   def new
-    admin = current_admin
-    unless admin
-      redirect_to root_path, notice: "You are not authorized to create new admin accounts."
-    end
-    @admin = Admin.new
+    redirect_to root_path, notice: "You are not authorized to create new admin accounts."
   end
 
   # GET /admins/1/edit

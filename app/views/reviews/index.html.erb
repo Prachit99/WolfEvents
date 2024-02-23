@@ -2,7 +2,7 @@
 
 <h1>Reviews</h1>
 
-<%= link_to "New review", new_review_path %>
+<%= link_to "New review", new_review_path, class: 'button-style'%>
 
 <%= form_tag reviews_path, method: :get, id: 'reviews-filter-form' do %>
   <label for="filter_type">Filter by:</label>
@@ -11,11 +11,11 @@
   <label for="filter_value">Filter Value:</label>
   <%= text_field_tag 'filter_value', nil, class: 'form-control' %>
 
-  <%= submit_tag 'Apply Filter', class: 'btn btn-primary' %>
+  <%= submit_tag 'Apply Filter', class: 'button-style' %>
 <% end %>
 
 <div id="reviews">
-  <table>
+  <table class="table-style">
     <tr>
       <th>Event Name</th>
       <th>Attendee Name</th>
@@ -30,10 +30,10 @@
         <td><%= Attendee.find(review.attendee_id).name %></td>
         <td><%= review.rating %></td>
         <td><%= review.feedback %></td>
-        <td><%= link_to "View Review", review %></td>
+        <td><%= link_to "View Review", review, class: 'button-style' %></td>
       </tr>
     <% end %>
   </table>
 </div>
 
-<%= link_to "Back to Home Page", root_path %>
+<%= link_to "Back to Home Page", root_path, class: 'button-style' %>

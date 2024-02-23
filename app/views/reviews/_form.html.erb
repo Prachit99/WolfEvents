@@ -1,6 +1,7 @@
+<div class="form-container">
 <%= form_with(model: review) do |form| %>
 
-  <div>
+  <div class="form-field-block">
     <%= form.label :event_id, 'Select Attended Event:' %>
     <%= select_tag 'event_id', options_from_collection_for_select(current_user.attended_events, 'id', 'event_name') %>
   </div>
@@ -17,17 +18,18 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="form-field-block">
     <%= form.label :rating, style: "display: block" %>
     <%= form.text_field :rating %>
   </div>
 
-  <div>
+  <div class="form-field-block">
     <%= form.label :feedback, style: "display: block" %>
     <%= form.text_field :feedback %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-field-block">
+    <%= form.submit class: 'styled-submit-button'%>
   </div>
 <% end %>
+</div>
