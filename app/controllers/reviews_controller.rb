@@ -18,6 +18,9 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new
+    if current_admin
+      redirect_to reviews_path
+    end
     @review = Review.new
   end
 

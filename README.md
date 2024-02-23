@@ -126,22 +126,36 @@ As an attendee, you can book tickets for an event:
 4. Fill the fields and book the event tickets.
 5. Attendee can book ticket for other attendees as well.
 
+### Review Functionalities
+
+As an attendee, you can engage with event reviews in the following ways:
+
+1. Navigate to the "See all reviews" section to access comprehensive feedback on past events.
+2. Easily search and filter reviews by event name or attendee ID to find relevant information.
+3. Contribute to the community by sharing your thoughts and ratings for events you've attended by clicking on "New Review".
+4. Choose the event from the dropdwon of past attended events and give rating and feedback.
+5. Easily modify or delete only your existing reviews to reflect any changes in your feedback or ratings.
+
+#### Additional Note: 
+You can use the following user credentials to access the review creation feature as the system is already populated with event tickets of past events for this user.
+- email  id: test@ncsu.edu
+- password: test@123
+
+
+
 ### Bonus Credit functionalities
-As an admin, you have the capability to search for attendees who have booked a specific event using the event name. Follow these steps to utilize the search function:
+- As an admin, you have the capability to search for attendees who have booked a specific event using the event name. Follow these steps to utilize the search function:
+    1. Navigate to the Admin Dashboard.
+    2. Locate the "Search Attendees for Event" section.
+    3. Enter the event name in the provided search input.
+    4. Click the "Search" button to retrieve a list of attendees who have booked the specified event.
 
-1. Navigate to the Admin Dashboard.
-2. Locate the "Search Attendees for Event" section.
-3. Enter the event name in the provided search input.
-4. Click the "Search" button to retrieve a list of attendees who have booked the specified event.
-
-Attendee Ticket Gifting
-Attendees now have the ability to purchase tickets on behalf of other attendees. This feature allows one attendee to buy a ticket for another, creating a shared experience. Both the purchaser and the recipient will be able to view and manage the ticket.
-
-To utilize this functionality:
-1. Log in as the attendee who wishes to purchase a ticket for another.
-2. Navigate to the desired event in the Attendee Dashboard.
-3. On event booking page, select other attendee for whom you want to buy tickets using the dropdown menu.
-4. Enter other details and book the tickets.
+- Attendee Ticket Gifting
+Attendees now have the ability to purchase tickets on behalf of other attendees. This feature allows one attendee to buy a ticket for another, creating a shared experience. Both the purchaser and the recipient will be able to view and manage the ticket. To utilize this functionality:
+    1. Log in as the attendee who wishes to purchase a ticket for another.
+    2. Navigate to the desired event in the Attendee Dashboard.
+    3. On event booking page, select other attendee for whom you want to buy tickets using the dropdown menu.
+    4. Enter other details and book the tickets.
 
 ## Support
 
@@ -151,3 +165,11 @@ If you encounter any issues or have questions, please contact the system adminis
 - Prachit Mhalgi
 - Sahil Sawant
 - Viraj Sanap
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.ncsu.edu/psmhalgi"><img src="https://avatars.githubusercontent.com/psmhalgi" width="100px;" alt=""/><br /><sub><b>Prachit Mhalgi</b></sub></a></td>
+    <td align="center"><a href="https://github.ncsu.edu/ssawant2"><img src="https://avatars.githubusercontent.com/ssawant2" width="100px;" alt=""/><br /><sub><b>Sahil Sawant</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.ncsu.edu/vasanap"><img src="https://avatars.githubusercontent.com/vasanap" width="100px;" alt=""/><br /><sub><b>Viraj Sanap</b></sub></a><br /></td>
+  </tr>
+</table>

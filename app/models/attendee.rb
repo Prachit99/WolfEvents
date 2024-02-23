@@ -11,12 +11,13 @@ class Attendee < ApplicationRecord
     Event.joins(:event_tickets)
          .where(event_tickets: { attendee_id: id })
          .where("events.event_end_time < ?", Time.now)
+         .where.not(events: { event_cat: "Miscellaneous/Family – Private" })
   end
 
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-  validates :phone, presence: true, uniqueness: true
+  validates :phone, presence: true, uniqueness: true, format: { with: /\A\d{10}\z/, message: "must be 10 digits" }
   validates :address, presence: true
-  validates :credit_card, presence: true, uniqueness: true
+  validates :credit_card, presence: true, uniqueness: true, format: { with: /\A\d{16}\z/, message: "must be 16 digits" }
 end

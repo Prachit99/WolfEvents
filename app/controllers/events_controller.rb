@@ -22,7 +22,7 @@ class EventsController < ApplicationController
     @rooms = Room.all
     admin = current_admin
     unless admin
-      redirect_to root_path, notice: "You are not authorized to view rooms."
+      redirect_to root_path, notice: "You are not authorized to create new events."
     end
   end
 
